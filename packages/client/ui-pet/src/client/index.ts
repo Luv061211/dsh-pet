@@ -11,7 +11,7 @@ import { bindSnapshotSelector } from './bind-snapshot.ts'
 // signature, and the sidebar.footer.action SlotMap merges.
 import type {} from '@deepseek-ai/dsh-api-remotes/client'
 // Type-only: pulls the pets Remote namespace merge (the shared remote face).
-import type {} from '@deepseek-ai/dsh-pet/remote'
+import type {} from '@luv061211/dsh-pet/remote'
 import type { RemoteResult } from '@deepseek-ai/dsh-typert-protocol'
 import type {} from '@deepseek-ai/dsh-client-ui-conversation/client'
 import type {} from '@deepseek-ai/dsh-client-ui-layout/client'
@@ -23,7 +23,7 @@ import { PetSettingsSection } from './PetSettingsSection.tsx'
 import { en, zh, type PetKey } from './locales.ts'
 import { petCommandInputDefinition } from './pet-command-input.ts'
 import { createPetStore } from './store.ts'
-import type { PetImportResult, PetSnapshot } from '@deepseek-ai/dsh-pet/client'
+import type { PetImportResult, PetSnapshot } from '@luv061211/dsh-pet/client'
 import type { PetSettingsInjected } from './slots.ts'
 
 export type { PetSettingsInjected } from './slots.ts'

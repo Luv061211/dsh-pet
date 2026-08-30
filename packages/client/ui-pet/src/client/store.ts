@@ -1,6 +1,6 @@
 import { defineStore } from '@deepseek-ai/dsh-client-runtime/client'
 import type { EngineStoreHandle } from '@deepseek-ai/dsh-client-runtime/client'
-import type { PetSnapshot } from '@deepseek-ai/dsh-pet/client'
+import type { PetSnapshot } from '@luv061211/dsh-pet/client'
 
 /** Shared client read model for the latest detached pet snapshot. */
 export interface PetStoreState { snapshot: PetSnapshot | null }

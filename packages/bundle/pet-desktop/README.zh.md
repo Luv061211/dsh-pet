@@ -1,8 +1,8 @@
-# @deepseek-ai/dsh-pet-desktop
+# @luv061211/dsh-pet-desktop
 
 [English](README.md) | 中文
 
-DeepSeek Harness 的可选桌面宠物 bundle。使用 `dsh plugin --profile web add @deepseek-ai/dsh-pet-desktop` 安装到 Web profile，然后通过 UI 或 `/pet` 唤醒或收起 companion。
+DeepSeek Harness 的可选桌面宠物 bundle。使用 `dsh plugin --profile web add @luv061211/dsh-pet-desktop` 安装到 Web profile，然后通过 UI 或 `/pet` 唤醒或收起 companion。
 
 该 bundle 组合 Codex 兼容的 8×9 宠物域、命令界面和浏览器 UI，不拥有任何默认 profile 行。宠物域始终暴露内置目录，并能从 DSH 宠物根目录加载经过校验的用户包。companion 只在 DSH Electron 桌面应用中打开；浏览器会话保留目录、活动和偏好控制，但不会创建置顶系统窗口。
 

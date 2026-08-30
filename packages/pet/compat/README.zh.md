@@ -1,8 +1,8 @@
-# @deepseek-ai/dsh-pet-compat
+# @luv061211/dsh-pet-compat
 
 [English](README.md) | 中文
 
-`@deepseek-ai/dsh-pet-compat` 是一个 browser-safe 值库，用于 DSH 自有且兼容 Codex 的宠物包：精灵图集单元为 192×208，网格为 8×9。它解析宿主标准化后的清单数据，应用 Codex 的单槽通知生命周期和替换规则，选择动画帧，从宿主提供的摘要生成缓存键，并根据宿主提供的终端事实选择图像协议。它导出的规范化默认轨道是 Browser、Electron 与 TUI 消费者共享的唯一动画来源；Electron 必须在内联文档中运行选择器时使用 `FRAME_AT_SOURCE`。
+`@luv061211/dsh-pet-compat` 是一个 browser-safe 值库，用于 DSH 自有且兼容 Codex 的宠物包：精灵图集单元为 192×208，网格为 8×9。它解析宿主标准化后的清单数据，应用 Codex 的单槽通知生命周期和替换规则，选择动画帧，从宿主提供的摘要生成缓存键，并根据宿主提供的终端事实选择图像协议。它导出的规范化默认轨道是 Browser、Electron 与 TUI 消费者共享的唯一动画来源；Electron 必须在内联文档中运行选择器时使用 `FRAME_AT_SOURCE`。
 
 宿主负责文件读取、图像解码、哈希、定时器和异步请求顺序。该库只接受已提交的值，不导入 Node API 或 Codex 文件，也不创建模型可见、会话或持久化状态。
 

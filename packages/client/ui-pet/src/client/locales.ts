@@ -1,6 +1,6 @@
 /**
  * The pet surface's copy, one dictionary per locale.
- * @module @deepseek-ai/dsh-client-ui-pet/client
+ * @module @luv061211/dsh-client-ui-pet/client
  */
 
 const zh = {

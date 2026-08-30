@@ -1,5 +1,5 @@
 {
-  "name": "@deepseek-ai/dsh-pet-compat",
+  "name": "@luv061211/dsh-pet-compat",
   "description": "Browser-safe Codex-compatible pet package parsing, frame selection, notifications, cache identity, and terminal protocol detection",
   "version": "0.1.1-rc.2",
   "publishConfig": {

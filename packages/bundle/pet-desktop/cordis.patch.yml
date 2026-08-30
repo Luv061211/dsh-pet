@@ -6,13 +6,13 @@
     # Declared a dependency of this bundle (not a peer) so profiles that add
     # `dsh-pet-desktop` actually install it.
     - id: desktop-companion
-      name: '@deepseek-ai/dsh-desktop-companion'
+      name: '@luv061211/dsh-desktop-companion'
 
     - id: pet
-      name: '@deepseek-ai/dsh-pet'
+      name: '@luv061211/dsh-pet'
 
     - id: command-pet
-      name: '@deepseek-ai/dsh-command-pet'
+      name: '@luv061211/dsh-command-pet'
 
     - id: ui-pet
-      name: '@deepseek-ai/dsh-client-ui-pet'
+      name: '@luv061211/dsh-client-ui-pet'

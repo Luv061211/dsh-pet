@@ -1,4 +1,4 @@
-# @deepseek-ai/dsh-command-pet
+# @luv061211/dsh-command-pet
 
 [English](README.md) | 中文
 
@@ -6,7 +6,7 @@
 
 ## 范围
 
-命令只修改 `@deepseek-ai/dsh-pet` 持有的持久化 `awake` 偏好。桌面伴侣由桌面能力齐备的 DSH profile 中的 `@deepseek-ai/dsh-pet-desktop` 提供。
+命令只修改 `@luv061211/dsh-pet` 持有的持久化 `awake` 偏好。桌面伴侣由桌面能力齐备的 DSH profile 中的 `@luv061211/dsh-pet-desktop` 提供。
 
 ## Model Experience
 

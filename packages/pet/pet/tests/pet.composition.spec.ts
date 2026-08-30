@@ -12,7 +12,7 @@ import { Context } from '@deepseek-ai/cordis'
 import Loader from '@deepseek-ai/cordis-plugin-loader'
 import Include from '@deepseek-ai/cordis-plugin-include'
 import SessionStore from '@deepseek-ai/dsh-session'
-import PetService from '@deepseek-ai/dsh-pet'
+import PetService from '@luv061211/dsh-pet'
 import FileSettingsProvider from '@deepseek-ai/dsh-settings-file'
 import { WebServer } from '@deepseek-ai/dsh-host-webserver'
 
@@ -42,7 +42,7 @@ describe('pet domain through a real cordis.yml', () => {
       '- id: sessions',
       "  name: '@deepseek-ai/dsh-session'",
       '- id: pet',
-      "  name: '@deepseek-ai/dsh-pet'",
+      "  name: '@luv061211/dsh-pet'",
       '  config:',
       `    petRoot: ${JSON.stringify(join(root, 'pets'))}`,
       '',
@@ -56,7 +56,7 @@ describe('pet domain through a real cordis.yml', () => {
     const modules = new Map<string, unknown>([
       ['@deepseek-ai/dsh-settings-file', FileSettingsProvider],
       ['@deepseek-ai/dsh-session', SessionStore],
-      ['@deepseek-ai/dsh-pet', PetService],
+      ['@luv061211/dsh-pet', PetService],
     ])
     ctx.loader.internal = {
       version: 'v2',
@@ -130,7 +130,7 @@ describe('pet domain through a real cordis.yml', () => {
       '- id: sessions',
       "  name: '@deepseek-ai/dsh-session'",
       '- id: pet',
-      "  name: '@deepseek-ai/dsh-pet'",
+      "  name: '@luv061211/dsh-pet'",
       '  config:',
       `    petRoot: ${JSON.stringify(petRoot)}`,
       '',
@@ -145,7 +145,7 @@ describe('pet domain through a real cordis.yml', () => {
       ['@deepseek-ai/dsh-settings-file', FileSettingsProvider],
       ['@deepseek-ai/dsh-host-webserver', WebServer],
       ['@deepseek-ai/dsh-session', SessionStore],
-      ['@deepseek-ai/dsh-pet', PetService],
+      ['@luv061211/dsh-pet', PetService],
     ])
     ctx.loader.internal = {
       version: 'v2',

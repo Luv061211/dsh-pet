@@ -6,7 +6,7 @@ import type {
   PetPackage,
   TerminalPetEnvironment,
   TerminalPetProtocol,
-} from '@deepseek-ai/dsh-pet-compat'
+} from '@luv061211/dsh-pet-compat'
 
 /** Terminal location used by Codex-compatible pet presentation. */
 export type PetTuiAnchor = 'composer' | 'screen-bottom'

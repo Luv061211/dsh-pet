@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { cleanup, fireEvent, render, waitFor } from '@testing-library/react'
-import type { PetDescriptor, PetImportResult, PetSnapshot } from '@deepseek-ai/dsh-pet/client'
+import type { PetDescriptor, PetImportResult, PetSnapshot } from '@luv061211/dsh-pet/client'
 import { PetSettingsSection } from '../src/client/PetSettingsSection.tsx'
 import { zh } from '../src/client/locales.ts'
 

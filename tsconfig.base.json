@@ -25,34 +25,34 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@deepseek-ai/dsh-pet": [
+      "@luv061211/dsh-pet": [
         "./packages/pet/pet/src"
       ],
-      "@deepseek-ai/dsh-pet/types": [
+      "@luv061211/dsh-pet/types": [
         "./packages/pet/pet/src/types.ts"
       ],
-      "@deepseek-ai/dsh-pet/client": [
+      "@luv061211/dsh-pet/client": [
         "./packages/pet/pet/src/client.ts"
       ],
-      "@deepseek-ai/dsh-pet-compat": [
+      "@luv061211/dsh-pet-compat": [
         "./packages/pet/compat/src"
       ],
-      "@deepseek-ai/dsh-pet-compat/types": [
+      "@luv061211/dsh-pet-compat/types": [
         "./packages/pet/compat/src/types.ts"
       ],
-      "@deepseek-ai/dsh-command-pet": [
+      "@luv061211/dsh-command-pet": [
         "./packages/pet/command-pet/src"
       ],
-      "@deepseek-ai/dsh-client-ui-pet": [
+      "@luv061211/dsh-client-ui-pet": [
         "./packages/client/ui-pet/src"
       ],
-      "@deepseek-ai/dsh-pet-tui": [
+      "@luv061211/dsh-pet-tui": [
         "./packages/pet/tui/src"
       ],
-      "@deepseek-ai/dsh-desktop-companion": [
+      "@luv061211/dsh-desktop-companion": [
         "./packages/desktop/companion/src"
       ],
-      "@deepseek-ai/dsh-pet/remote": [
+      "@luv061211/dsh-pet/remote": [
         "./packages/pet/pet/remote-client.d.ts"
       ]
     }

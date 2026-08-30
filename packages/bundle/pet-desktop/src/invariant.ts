@@ -3,7 +3,7 @@
 import type { Context } from '@deepseek-ai/cordis'
 import type { InvariantInstaller } from '@deepseek-ai/dsh-invariants'
 
-const PACKAGE_NAME = '@deepseek-ai/dsh-pet-desktop'
+const PACKAGE_NAME = '@luv061211/dsh-pet-desktop'
 
 /** Cordis companion plugin name. */
 export const name = 'pet-desktop-bundle-invariant'

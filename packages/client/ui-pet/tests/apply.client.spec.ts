@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { describe, expect, it } from 'vitest'
-import type { PetDescriptor } from '@deepseek-ai/dsh-pet/client'
+import type { PetDescriptor } from '@luv061211/dsh-pet/client'
 import { createPetStore } from '../src/client/store.ts'
 
 const PET: PetDescriptor = {

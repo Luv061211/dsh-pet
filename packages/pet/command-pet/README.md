@@ -1,4 +1,4 @@
-# @deepseek-ai/dsh-command-pet
+# @luv061211/dsh-command-pet
 
 English | [中文](README.zh.md)
 
@@ -6,7 +6,7 @@ Human-facing `/pet` command for the optional desktop companion. `/pet` and `/pet
 
 ## Scope
 
-The command changes only the durable `awake` preference owned by `@deepseek-ai/dsh-pet`. The desktop companion itself is supplied by `@deepseek-ai/dsh-pet-desktop` in a desktop-capable DSH profile.
+The command changes only the durable `awake` preference owned by `@luv061211/dsh-pet`. The desktop companion itself is supplied by `@luv061211/dsh-pet-desktop` in a desktop-capable DSH profile.
 
 ## Model Experience
 

@@ -2,7 +2,7 @@
 
 import type { Context } from '@deepseek-ai/cordis'
 import type { CommandInvocation, CommandResult } from '@deepseek-ai/dsh-commands'
-import type {} from '@deepseek-ai/dsh-pet'
+import type {} from '@luv061211/dsh-pet'
 
 export const name = 'command-pet'
 export const inject = ['commands', 'pets']

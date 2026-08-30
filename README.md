@@ -11,33 +11,33 @@ A Codex-style desktop pet companion plugin family for [DeepSeek Harness](https:/
 
 | Package | Role |
 |---|---|
-| [`@deepseek-ai/dsh-pet`](packages/pet/pet/README.md) | `ctx.pets` Service Definition: durable v3 preference, validated package catalog, live session-activity read model, `pet/update` events, Typert Remote service |
-| [`@deepseek-ai/dsh-pet-compat`](packages/pet/compat/README.md) | Browser-safe Codex-compatible package parser, frame scheduler, terminal protocol detection |
-| [`@deepseek-ai/dsh-command-pet`](packages/pet/command-pet/README.md) | The `/pet` wake / tuck / status slash command |
-| [`@deepseek-ai/dsh-pet-tui`](packages/pet/pet-tui/README.md) | Standalone terminal pet host (library surface) |
-| [`@deepseek-ai/dsh-client-ui-pet`](packages/client/ui-pet/README.md) | Browser surface: settings section and `/pet` command-input projection |
-| [`@deepseek-ai/dsh-pet-desktop`](packages/bundle/pet-desktop/README.md) | Profile bundle mounting the companion registry ahead of the pet row |
-| [`@deepseek-ai/dsh-desktop-companion`](packages/desktop/companion/README.md) | Optional companion-window descriptor registry |
+| [`@luv061211/dsh-pet`](packages/pet/pet/README.md) | `ctx.pets` Service Definition: durable v3 preference, validated package catalog, live session-activity read model, `pet/update` events, Typert Remote service |
+| [`@luv061211/dsh-pet-compat`](packages/pet/compat/README.md) | Browser-safe Codex-compatible package parser, frame scheduler, terminal protocol detection |
+| [`@luv061211/dsh-command-pet`](packages/pet/command-pet/README.md) | The `/pet` wake / tuck / status slash command |
+| [`@luv061211/dsh-pet-tui`](packages/pet/pet-tui/README.md) | Standalone terminal pet host (library surface) |
+| [`@luv061211/dsh-client-ui-pet`](packages/client/ui-pet/README.md) | Browser surface: settings section and `/pet` command-input projection |
+| [`@luv061211/dsh-pet-desktop`](packages/bundle/pet-desktop/README.md) | Profile bundle mounting the companion registry ahead of the pet row |
+| [`@luv061211/dsh-desktop-companion`](packages/desktop/companion/README.md) | Optional companion-window descriptor registry |
 | [`desktop/`](desktop/README.md) | Optional Electron desktop shell that hosts the draggable companion window |
 
 ### Using it
 
-The plugin family runs inside a DeepSeek Harness composition. Today the simplest path is to clone DeepSeek Harness and this repository side by side, then compose the pet rows from your profile:
+Once published, the packages install from npm under the `@luv061211` scope (`@luv061211/dsh-pet`, `@luv061211/dsh-pet-desktop`, ...). The plugin family runs inside a DeepSeek Harness composition. Today the simplest path is to clone DeepSeek Harness and this repository side by side, then compose the pet rows from your profile:
 
 ```yaml
 - id: desktop-companion
-  name: '@deepseek-ai/dsh-desktop-companion'
+  name: '@luv061211/dsh-desktop-companion'
 
 - id: pet
-  name: '@deepseek-ai/dsh-pet'
+  name: '@luv061211/dsh-pet'
   config:
     petRoot: '<your-dsh-home>/pets'
 
 - id: command-pet
-  name: '@deepseek-ai/dsh-command-pet'
+  name: '@luv061211/dsh-command-pet'
 
 - id: ui-pet
-  name: '@deepseek-ai/dsh-client-ui-pet'
+  name: '@luv061211/dsh-client-ui-pet'
 ```
 
 The `desktop-companion` row must load before `pet` — the pet service reads the registry once at plugin-load time to register the draggable companion window. A working end-to-end reference (including the api-remotes client wiring) lives at [Luv061211/deepseek-harness, branch `feat/pet-companion`](https://github.com/Luv061211/deepseek-harness/tree/feat/pet-companion).
@@ -57,7 +57,7 @@ The browser-surface specs under `packages/client/ui-pet/tests` are typechecked h
 
 ### Limitations
 
-- Built against DeepSeek Harness `0.1.1-rc.2` (the npm-published line). The upstream master line moved to `0.1.2-alpha.1` and renamed several client internals; this repository tracks the published line.
+- Built against DeepSeek Harness `0.1.1-rc.2` (the npm-published line); the family publishes under the `@luv061211` npm scope. The upstream master line moved to `0.1.2-alpha.1` and renamed several client internals; this repository tracks the published line.
 - The generated Typert Remote client artifacts (`./typert`, `./remote`) ship as a hand-maintained declaration in `packages/pet/pet/remote-client.d.ts`; the runtime contribution is mounted by the harness-side api-remotes assembly in the reference fork.
 - No external directory watcher: the catalog refreshes at startup, after an import or replacement, and on explicit refresh.
 
@@ -72,7 +72,7 @@ The browser-surface specs under `packages/client/ui-pet/tests` are typechecked h
 
 ### 使用
 
-插件家族运行在 DeepSeek Harness 组合之内。目前最简单的方式是把 DeepSeek Harness 与本仓库并排克隆，然后在你的 profile 中组合宠物行（见上文 YAML）。`desktop-companion` 行必须先于 `pet` 行加载——pet 服务在插件加载时读取注册表以注册可拖拽伴侣窗口。端到端参考实现（含 api-remotes 客户端接线）见 [Luv061211/deepseek-harness 的 `feat/pet-companion` 分支](https://github.com/Luv061211/deepseek-harness/tree/feat/pet-companion)。
+发布后，各包以 `@luv061211` scope（`@luv061211/dsh-pet`、`@luv061211/dsh-pet-desktop` 等）从 npm 安装。插件家族运行在 DeepSeek Harness 组合之内。目前最简单的方式是把 DeepSeek Harness 与本仓库并排克隆，然后在你的 profile 中组合宠物行（见上文 YAML）。`desktop-companion` 行必须先于 `pet` 行加载——pet 服务在插件加载时读取注册表以注册可拖拽伴侣窗口。端到端参考实现（含 api-remotes 客户端接线）见 [Luv061211/deepseek-harness 的 `feat/pet-companion` 分支](https://github.com/Luv061211/deepseek-harness/tree/feat/pet-companion)。
 
 经过校验的用户包是一个包含 `pet.json` 与其清单所指向 WebP 精灵图的目录（192×208 单元、8 列、9 或 11 行）。把它放到配置的 `petRoot` 下，再在设置页刷新目录即可。当宿主组合提供原生目录选择能力时，原生导入、原地替换与打开文件夹操作会出现。
 
@@ -89,7 +89,7 @@ pnpm build       # 每个包 tsc + tsdown 构建
 
 ### 限制
 
-- 基于 DeepSeek Harness `0.1.1-rc.2`（npm 已发布线）构建；上游 master 已演进到 `0.1.2-alpha.1` 并更名了若干客户端内部结构，本仓库跟随已发布线。
+- 基于 DeepSeek Harness `0.1.1-rc.2`（npm 已发布线）构建；本家族以 `@luv061211` npm scope 发布；上游 master 已演进到 `0.1.2-alpha.1` 并更名了若干客户端内部结构，本仓库跟随已发布线。
 - Typert Remote 客户端产物（`./typert`、`./remote`）目前以手写声明 `packages/pet/pet/remote-client.d.ts` 提供；运行时挂载由 harness 侧 api-remotes 组合完成（见参考 fork）。
 - 没有外部目录监听：目录在启动、导入或替换之后、以及显式刷新时更新。
 

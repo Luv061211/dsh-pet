@@ -9,7 +9,7 @@ import {
   type PetPackage,
   type PetNotification,
   type TerminalPetEnvironment,
-} from '@deepseek-ai/dsh-pet-compat'
+} from '@luv061211/dsh-pet-compat'
 import { PetPicker, parsePetsCommand } from './picker.ts'
 import {
   DEFAULT_PET_TUI_CONFIG,

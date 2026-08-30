@@ -1,6 +1,6 @@
 /** Slash-command picker and preview invalidation for the terminal pet. */
 
-import type { PetPackage } from '@deepseek-ai/dsh-pet-compat'
+import type { PetPackage } from '@luv061211/dsh-pet-compat'
 
 /**
  * Parse only the host-owned `/pets` command.
