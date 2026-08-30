@@ -1,0 +1,43 @@
+{
+  "formatVersion": 1,
+  "provenance": {
+    "codexDesktopVersion": "26.818.5229.0",
+    "ownership": "dsh-normalized-fixture",
+    "evidence": [
+      {
+        "kind": "local-cdp",
+        "subject": "desktop avatar-overlay mascot interaction",
+        "coordinateSpace": "CSS pixels"
+      }
+    ]
+  },
+  "observations": [
+    {
+      "operation": "click",
+      "input": {
+        "target": "mascot-center"
+      },
+      "expected": {
+        "positionDeltaCssPx": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    },
+    {
+      "operation": "drag",
+      "input": {
+        "deltaCssPx": {
+          "x": 4,
+          "y": 0
+        }
+      },
+      "expected": {
+        "positionDeltaCssPx": {
+          "x": 4,
+          "y": 0
+        }
+      }
+    }
+  ]
+}

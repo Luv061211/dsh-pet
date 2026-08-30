@@ -1,0 +1,26 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./packages/pet/pet"
+    },
+    {
+      "path": "./packages/pet/command-pet"
+    },
+    {
+      "path": "./packages/pet/compat"
+    },
+    {
+      "path": "./packages/pet/tui"
+    },
+    {
+      "path": "./packages/client/ui-pet"
+    },
+    {
+      "path": "./packages/bundle/pet-desktop"
+    },
+    {
+      "path": "./packages/desktop/companion"
+    }
+  ]
+}

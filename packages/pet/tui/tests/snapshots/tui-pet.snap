@@ -1,0 +1,23 @@
+composer-anchor
+│hello from DSH                                 🐾 DSH Mascot [idle:0]
+│> write tests first
+└──────────────────────────────────────────────╴reserved:16
+
+screen-bottom-anchor
+│hello from DSH
+│> write tests first
+└──────────────────────────────────────────────╴reserved:16
+                                               🐾 DSH Mascot [idle:0]
+
+picker
+/pets
+  Disable terminal pets
+> DSH Mascot
+  Custom Nine Rows
+
+preview: 🐾 DSH Mascot [idle:0]
+
+fallback
+│hello from DSH                         terminal pet unavailable: tmux
+│> write tests first
+└──────────────────────────────────────╴reserved:26

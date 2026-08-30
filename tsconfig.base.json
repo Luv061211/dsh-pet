@@ -1,0 +1,60 @@
+{
+  "compilerOptions": {
+    "target": "es2024",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "declaration": true,
+    "sourceMap": true,
+    "declarationMap": true,
+    "composite": true,
+    "incremental": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
+    "verbatimModuleSyntax": false,
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "types": [
+      "node"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@deepseek-ai/dsh-pet": [
+        "./packages/pet/pet/src"
+      ],
+      "@deepseek-ai/dsh-pet/types": [
+        "./packages/pet/pet/src/types.ts"
+      ],
+      "@deepseek-ai/dsh-pet/client": [
+        "./packages/pet/pet/src/client.ts"
+      ],
+      "@deepseek-ai/dsh-pet-compat": [
+        "./packages/pet/compat/src"
+      ],
+      "@deepseek-ai/dsh-pet-compat/types": [
+        "./packages/pet/compat/src/types.ts"
+      ],
+      "@deepseek-ai/dsh-command-pet": [
+        "./packages/pet/command-pet/src"
+      ],
+      "@deepseek-ai/dsh-client-ui-pet": [
+        "./packages/client/ui-pet/src"
+      ],
+      "@deepseek-ai/dsh-pet-tui": [
+        "./packages/pet/tui/src"
+      ],
+      "@deepseek-ai/dsh-desktop-companion": [
+        "./packages/desktop/companion/src"
+      ],
+      "@deepseek-ai/dsh-pet/remote": [
+        "./packages/pet/pet/remote-client.d.ts"
+      ]
+    }
+  }
+}

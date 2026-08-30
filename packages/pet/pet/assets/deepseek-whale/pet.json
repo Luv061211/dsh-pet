@@ -1,0 +1,12 @@
+{
+  "id": "deepseek-whale",
+  "displayName": "DeepSeek Whale",
+  "description": "A pixel-art blue whale companion for DeepSeek Harness tasks.",
+  "spritesheetPath": "spritesheet.webp",
+  "frame": {
+    "width": 192,
+    "height": 208,
+    "columns": 8,
+    "rows": 9
+  }
+}

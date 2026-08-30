@@ -1,0 +1,91 @@
+{
+  "formatVersion": 1,
+  "provenance": {
+    "codexDesktopVersion": "26.818.5229.0",
+    "ownership": "dsh-normalized-fixture",
+    "evidence": [
+      {
+        "kind": "source",
+        "relativePath": "codex-rs/tui/src/pets/image_protocol.rs",
+        "subject": "terminal image-protocol selection"
+      }
+    ]
+  },
+  "cases": [
+    {
+      "name": "tmux overrides an otherwise Kitty-capable terminal",
+      "input": {
+        "terminal": "ghostty",
+        "multiplexer": "tmux"
+      },
+      "expected": {
+        "supported": false,
+        "reason": "tmux"
+      }
+    },
+    {
+      "name": "zellij overrides an otherwise Kitty-capable terminal",
+      "input": {
+        "terminal": "kitty",
+        "multiplexer": "zellij"
+      },
+      "expected": {
+        "supported": false,
+        "reason": "zellij"
+      }
+    },
+    {
+      "name": "new iTerm2 uses Kitty local-file graphics",
+      "input": {
+        "terminalProgram": "iTerm.app",
+        "version": "3.6.10"
+      },
+      "expected": {
+        "supported": true,
+        "protocol": "kitty-local-file"
+      }
+    },
+    {
+      "name": "old iTerm2 is rejected",
+      "input": {
+        "terminalProgram": "iTerm.app",
+        "version": "3.5.14"
+      },
+      "expected": {
+        "supported": false,
+        "reason": "iterm2-too-old"
+      }
+    },
+    {
+      "name": "WezTerm uses Kitty graphics",
+      "input": {
+        "terminal": "wezterm"
+      },
+      "expected": {
+        "supported": true,
+        "protocol": "kitty"
+      }
+    },
+    {
+      "name": "Windows Terminal uses Sixel",
+      "input": {
+        "terminal": "windows-terminal"
+      },
+      "expected": {
+        "supported": true,
+        "protocol": "sixel"
+      }
+    },
+    {
+      "name": "unknown terminals are rejected",
+      "input": {
+        "terminal": "unknown",
+        "term": "xterm-256color"
+      },
+      "expected": {
+        "supported": false,
+        "reason": "terminal"
+      }
+    }
+  ]
+}

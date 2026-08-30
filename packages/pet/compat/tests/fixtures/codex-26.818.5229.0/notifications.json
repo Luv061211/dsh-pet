@@ -1,0 +1,58 @@
+{
+  "formatVersion": 1,
+  "provenance": {
+    "codexDesktopVersion": "26.818.5229.0",
+    "ownership": "dsh-normalized-fixture",
+    "evidence": [
+      {
+        "kind": "source",
+        "relativePath": "codex-rs/tui/src/pets/ambient.rs",
+        "subject": "notification labels, fallback bodies, lifetimes, and replacement"
+      }
+    ]
+  },
+  "kinds": [
+    {
+      "kind": "running",
+      "animation": "running",
+      "label": "Running",
+      "fallbackBody": "Thinking",
+      "lifetimeMs": 180000
+    },
+    {
+      "kind": "waiting",
+      "animation": "waiting",
+      "label": "Needs input",
+      "fallbackBody": "Needs input",
+      "lifetimeMs": 86400000
+    },
+    {
+      "kind": "review",
+      "animation": "review",
+      "label": "Ready",
+      "fallbackBody": "Ready",
+      "lifetimeMs": 604800000
+    },
+    {
+      "kind": "failed",
+      "animation": "failed",
+      "label": "Blocked",
+      "fallbackBody": "Blocked",
+      "lifetimeMs": 3600000
+    }
+  ],
+  "replacementCase": {
+    "initial": {
+      "kind": "running",
+      "updatedAtMs": 1000
+    },
+    "incoming": {
+      "kind": "waiting",
+      "updatedAtMs": 1001
+    },
+    "expectedVisible": {
+      "kind": "waiting",
+      "updatedAtMs": 1001
+    }
+  }
+}

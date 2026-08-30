@@ -1,0 +1,18 @@
+- insert:
+    # The desktop-companion service the `pet` row registers its draggable
+    # window against. It must load before `pet`, whose apply reads
+    # `ctx.get('desktopCompanion')` at plugin-load time; a later or absent row
+    # leaves the service undefined and the companion window never appears.
+    # Declared a dependency of this bundle (not a peer) so profiles that add
+    # `dsh-pet-desktop` actually install it.
+    - id: desktop-companion
+      name: '@deepseek-ai/dsh-desktop-companion'
+
+    - id: pet
+      name: '@deepseek-ai/dsh-pet'
+
+    - id: command-pet
+      name: '@deepseek-ai/dsh-command-pet'
+
+    - id: ui-pet
+      name: '@deepseek-ai/dsh-client-ui-pet'

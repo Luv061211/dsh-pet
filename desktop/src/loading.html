@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'" />
+  <title>DeepSeek Harness</title>
+  <style>
+    html, body { height: 100%; margin: 0; background: #0d1117; color: #e6edf3;
+      font-family: system-ui, "Segoe UI", sans-serif; display: flex;
+      align-items: center; justify-content: center; }
+    .box { text-align: center; }
+    .spinner { width: 36px; height: 36px; margin: 0 auto 20px;
+      border: 3px solid #30363d; border-top-color: #4f8cff; border-radius: 50%;
+      animation: spin 0.9s linear infinite; }
+    p { font-size: 14px; color: #8b949e; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div class="spinner"></div>
+    <p>正在启动 DeepSeek Harness…</p>
+  </div>
+</body>
+</html>

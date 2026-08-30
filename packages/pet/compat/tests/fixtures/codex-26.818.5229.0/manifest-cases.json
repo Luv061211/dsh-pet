@@ -1,0 +1,152 @@
+{
+  "formatVersion": 1,
+  "provenance": {
+    "codexDesktopVersion": "26.818.5229.0",
+    "ownership": "dsh-normalized-fixture",
+    "evidence": [
+      {
+        "kind": "source",
+        "relativePath": "codex-rs/tui/src/pets/model.rs",
+        "subject": "custom pet manifest validation"
+      }
+    ]
+  },
+  "geometry": {
+    "cellPx": {
+      "width": 192,
+      "height": 208
+    },
+    "grid": {
+      "columns": 8,
+      "rows": 9
+    },
+    "spritesheetPx": {
+      "width": 1536,
+      "height": 1872
+    },
+    "maxFrames": 256,
+    "variantGrids": [
+      {
+        "columns": 8,
+        "rows": 11,
+        "spritesheetPx": {
+          "width": 1536,
+          "height": 2288
+        },
+        "v2": true
+      }
+    ]
+  },
+  "cases": [
+    {
+      "name": "accepts a relative spritesheet and exact grid",
+      "input": {
+        "id": "original-dsh-test",
+        "displayName": "Original DSH Test",
+        "description": "",
+        "spritesheetPath": "spritesheet.webp",
+        "frame": {
+          "width": 192,
+          "height": 208,
+          "columns": 8,
+          "rows": 9
+        },
+        "spritesheetDimensions": {
+          "width": 1536,
+          "height": 1872
+        }
+      },
+      "expected": {
+        "accepted": true,
+        "frameCount": 72
+      }
+    },
+    {
+      "name": "rejects a parent-traversing spritesheet path",
+      "input": {
+        "spritesheetPath": "../outside.webp"
+      },
+      "expected": {
+        "accepted": false,
+        "reason": "spritesheet-path-outside-pet-directory"
+      }
+    },
+    {
+      "name": "rejects a symbolic absolute spritesheet path",
+      "input": {
+        "spritesheetPathKind": "absolute"
+      },
+      "expected": {
+        "accepted": false,
+        "reason": "spritesheet-path-outside-pet-directory"
+      }
+    },
+    {
+      "name": "rejects a grid that does not cover the spritesheet exactly",
+      "input": {
+        "frame": {
+          "width": 192,
+          "height": 208,
+          "columns": 8,
+          "rows": 8
+        },
+        "spritesheetDimensions": {
+          "width": 1536,
+          "height": 1872
+        }
+      },
+      "expected": {
+        "accepted": false,
+        "reason": "frame-grid-does-not-cover-spritesheet"
+      }
+    },
+    {
+      "name": "derives the eleven-row grid for a bare v2 manifest",
+      "input": {
+        "id": "v2-tall-pet",
+        "displayName": "V2 Tall Pet",
+        "description": "",
+        "spritesheetPath": "spritesheet.webp",
+        "spriteVersionNumber": 2,
+        "spritesheetDimensions": {
+          "width": 1536,
+          "height": 2288
+        }
+      },
+      "expected": {
+        "accepted": true,
+        "frameCount": 88
+      }
+    },
+    {
+      "name": "infers the standard grid when a Codex kind is present",
+      "input": {
+        "id": "kind-pet",
+        "displayName": "Kind Pet",
+        "description": "",
+        "spritesheetPath": "spritesheet.webp",
+        "kind": "creature",
+        "spritesheetDimensions": {
+          "width": 1536,
+          "height": 1872
+        }
+      },
+      "expected": {
+        "accepted": true,
+        "frameCount": 72
+      }
+    }
+  ],
+  "cacheKey": {
+    "input": {
+      "contentDigest": "0123456789abcdef",
+      "frame": {
+        "width": 192,
+        "height": 208,
+        "columns": 8,
+        "rows": 9
+      }
+    },
+    "expected": "sha256-0123456789abcdef-192x208-8x9"
+  }
+}

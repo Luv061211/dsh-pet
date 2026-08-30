@@ -1,0 +1,127 @@
+{
+  "formatVersion": 1,
+  "provenance": {
+    "codexDesktopVersion": "26.818.5229.0",
+    "ownership": "dsh-normalized-fixture",
+    "evidence": [
+      {
+        "kind": "source",
+        "relativePath": "codex-rs/tui/src/pets/model.rs",
+        "subject": "animation defaults, frame timing, and fallback"
+      }
+    ]
+  },
+  "rules": {
+    "maximumFps": 60,
+    "defaultFps": 8,
+    "defaultLoop": true,
+    "defaultFallback": "idle",
+    "reducedMotion": "first-frame"
+  },
+  "cases": [
+    {
+      "name": "loops an animation from its configured loop start",
+      "animation": {
+        "frames": [
+          {
+            "spriteIndex": 8,
+            "durationMs": 120
+          },
+          {
+            "spriteIndex": 9,
+            "durationMs": 220
+          }
+        ],
+        "loopStart": 0,
+        "fallback": "idle"
+      },
+      "samples": [
+        {
+          "elapsedMs": 0,
+          "spriteIndex": 8
+        },
+        {
+          "elapsedMs": 120,
+          "spriteIndex": 9
+        },
+        {
+          "elapsedMs": 340,
+          "spriteIndex": 8
+        }
+      ]
+    },
+    {
+      "name": "uses fallback after a non-looping animation completes",
+      "animation": {
+        "frames": [
+          {
+            "spriteIndex": 32,
+            "durationMs": 100
+          },
+          {
+            "spriteIndex": 33,
+            "durationMs": 100
+          }
+        ],
+        "loopStart": null,
+        "fallback": "idle"
+      },
+      "fallbackAnimation": {
+        "frames": [
+          {
+            "spriteIndex": 0,
+            "durationMs": 1680
+          }
+        ],
+        "loopStart": 0,
+        "fallback": "idle"
+      },
+      "samples": [
+        {
+          "elapsedMs": 0,
+          "spriteIndex": 32
+        },
+        {
+          "elapsedMs": 100,
+          "spriteIndex": 33
+        },
+        {
+          "elapsedMs": 200,
+          "animation": "idle",
+          "spriteIndex": 0
+        }
+      ]
+    },
+    {
+      "name": "shows the first frame when reduced motion is enabled",
+      "animation": {
+        "frames": [
+          {
+            "spriteIndex": 56,
+            "durationMs": 120
+          },
+          {
+            "spriteIndex": 57,
+            "durationMs": 220
+          }
+        ]
+      },
+      "expectedSpriteIndex": 56
+    }
+  ],
+  "staleRequestCase": {
+    "requests": [
+      {
+        "requestId": 41,
+        "result": "older-preview"
+      },
+      {
+        "requestId": 42,
+        "result": "newer-preview"
+      }
+    ],
+    "completionOrder": [42, 41],
+    "expectedCommittedRequestId": 42,
+    "ignoredRequestIds": [41]
+  }
+}
