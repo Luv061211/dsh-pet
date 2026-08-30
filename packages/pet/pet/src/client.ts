@@ -3,7 +3,7 @@
  * package's types outlet. Client code imports ONLY the client namespace
  * (repo discipline), so `./client` projects the same single-source content
  * `./types` serves to host consumers — zero duplication.
- * @module @luv061211/dsh-pet/client
+ * @module @luv1211/dsh-pet/client
  */
 
 export type * from './types.ts'

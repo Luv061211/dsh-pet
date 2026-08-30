@@ -1,13 +1,13 @@
 /** Browser-safe sprite frame projection shared by Web and desktop documents. */
 
-import { DEFAULT_PET_ANIMATIONS, frameAt } from '@luv061211/dsh-pet-compat'
+import { DEFAULT_PET_ANIMATIONS, frameAt } from '@luv1211/dsh-pet-compat'
 import {
   PET_COMPAT_ATLAS,
   petWidthForSize,
   type PetAnimationState,
   type PetPresentation,
 } from './runtime.ts'
-import type { PetAnimation } from '@luv061211/dsh-pet-compat'
+import type { PetAnimation } from '@luv1211/dsh-pet-compat'
 
 /** One CSS frame projection for the validated compatible atlas. */
 export interface PetSpriteFrameStyle {

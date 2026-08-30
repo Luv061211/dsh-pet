@@ -11,33 +11,33 @@ A Codex-style desktop pet companion plugin family for [DeepSeek Harness](https:/
 
 | Package | Role |
 |---|---|
-| [`@luv061211/dsh-pet`](packages/pet/pet/README.md) | `ctx.pets` Service Definition: durable v3 preference, validated package catalog, live session-activity read model, `pet/update` events, Typert Remote service |
-| [`@luv061211/dsh-pet-compat`](packages/pet/compat/README.md) | Browser-safe Codex-compatible package parser, frame scheduler, terminal protocol detection |
-| [`@luv061211/dsh-command-pet`](packages/pet/command-pet/README.md) | The `/pet` wake / tuck / status slash command |
-| [`@luv061211/dsh-pet-tui`](packages/pet/pet-tui/README.md) | Standalone terminal pet host (library surface) |
-| [`@luv061211/dsh-client-ui-pet`](packages/client/ui-pet/README.md) | Browser surface: settings section and `/pet` command-input projection |
-| [`@luv061211/dsh-pet-desktop`](packages/bundle/pet-desktop/README.md) | Profile bundle mounting the companion registry ahead of the pet row |
-| [`@luv061211/dsh-desktop-companion`](packages/desktop/companion/README.md) | Optional companion-window descriptor registry |
+| [`@luv1211/dsh-pet`](packages/pet/pet/README.md) | `ctx.pets` Service Definition: durable v3 preference, validated package catalog, live session-activity read model, `pet/update` events, Typert Remote service |
+| [`@luv1211/dsh-pet-compat`](packages/pet/compat/README.md) | Browser-safe Codex-compatible package parser, frame scheduler, terminal protocol detection |
+| [`@luv1211/dsh-command-pet`](packages/pet/command-pet/README.md) | The `/pet` wake / tuck / status slash command |
+| [`@luv1211/dsh-pet-tui`](packages/pet/pet-tui/README.md) | Standalone terminal pet host (library surface) |
+| [`@luv1211/dsh-client-ui-pet`](packages/client/ui-pet/README.md) | Browser surface: settings section and `/pet` command-input projection |
+| [`@luv1211/dsh-pet-desktop`](packages/bundle/pet-desktop/README.md) | Profile bundle mounting the companion registry ahead of the pet row |
+| [`@luv1211/dsh-desktop-companion`](packages/desktop/companion/README.md) | Optional companion-window descriptor registry |
 | [`desktop/`](desktop/README.md) | Optional Electron desktop shell that hosts the draggable companion window |
 
 ### Using it
 
-Once published, the packages install from npm under the `@luv061211` scope (`@luv061211/dsh-pet`, `@luv061211/dsh-pet-desktop`, ...). The plugin family runs inside a DeepSeek Harness composition. Today the simplest path is to clone DeepSeek Harness and this repository side by side, then compose the pet rows from your profile:
+Once published, the packages install from npm under the `@luv061211` scope (`@luv1211/dsh-pet`, `@luv1211/dsh-pet-desktop`, ...). The plugin family runs inside a DeepSeek Harness composition. Today the simplest path is to clone DeepSeek Harness and this repository side by side, then compose the pet rows from your profile:
 
 ```yaml
 - id: desktop-companion
-  name: '@luv061211/dsh-desktop-companion'
+  name: '@luv1211/dsh-desktop-companion'
 
 - id: pet
-  name: '@luv061211/dsh-pet'
+  name: '@luv1211/dsh-pet'
   config:
     petRoot: '<your-dsh-home>/pets'
 
 - id: command-pet
-  name: '@luv061211/dsh-command-pet'
+  name: '@luv1211/dsh-command-pet'
 
 - id: ui-pet
-  name: '@luv061211/dsh-client-ui-pet'
+  name: '@luv1211/dsh-client-ui-pet'
 ```
 
 The `desktop-companion` row must load before `pet` — the pet service reads the registry once at plugin-load time to register the draggable companion window. A working end-to-end reference (including the api-remotes client wiring) lives at [Luv061211/deepseek-harness, branch `feat/pet-companion`](https://github.com/Luv061211/deepseek-harness/tree/feat/pet-companion).
@@ -72,7 +72,7 @@ The browser-surface specs under `packages/client/ui-pet/tests` are typechecked h
 
 ### 使用
 
-发布后，各包以 `@luv061211` scope（`@luv061211/dsh-pet`、`@luv061211/dsh-pet-desktop` 等）从 npm 安装。插件家族运行在 DeepSeek Harness 组合之内。目前最简单的方式是把 DeepSeek Harness 与本仓库并排克隆，然后在你的 profile 中组合宠物行（见上文 YAML）。`desktop-companion` 行必须先于 `pet` 行加载——pet 服务在插件加载时读取注册表以注册可拖拽伴侣窗口。端到端参考实现（含 api-remotes 客户端接线）见 [Luv061211/deepseek-harness 的 `feat/pet-companion` 分支](https://github.com/Luv061211/deepseek-harness/tree/feat/pet-companion)。
+发布后，各包以 `@luv061211` scope（`@luv1211/dsh-pet`、`@luv1211/dsh-pet-desktop` 等）从 npm 安装。插件家族运行在 DeepSeek Harness 组合之内。目前最简单的方式是把 DeepSeek Harness 与本仓库并排克隆，然后在你的 profile 中组合宠物行（见上文 YAML）。`desktop-companion` 行必须先于 `pet` 行加载——pet 服务在插件加载时读取注册表以注册可拖拽伴侣窗口。端到端参考实现（含 api-remotes 客户端接线）见 [Luv061211/deepseek-harness 的 `feat/pet-companion` 分支](https://github.com/Luv061211/deepseek-harness/tree/feat/pet-companion)。
 
 经过校验的用户包是一个包含 `pet.json` 与其清单所指向 WebP 精灵图的目录（192×208 单元、8 列、9 或 11 行）。把它放到配置的 `petRoot` 下，再在设置页刷新目录即可。当宿主组合提供原生目录选择能力时，原生导入、原地替换与打开文件夹操作会出现。
 

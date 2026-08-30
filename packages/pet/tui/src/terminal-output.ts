@@ -1,6 +1,6 @@
 /** Kitty/Sixel output and terminal lifecycle sequences for the DSH TUI host. */
 
-import type { TerminalPetProtocol } from '@luv061211/dsh-pet-compat'
+import type { TerminalPetProtocol } from '@luv1211/dsh-pet-compat'
 import type { PetTuiFramePayload, PetTuiLayout, PetTuiTerminal } from './types.ts'
 
 /** Escape sequence that enters the alternate screen and hides the cursor. */

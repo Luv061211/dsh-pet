@@ -1,6 +1,6 @@
 /** Pure layout and fallback rendering for the terminal pet consumer. */
 
-import { frameAt, notificationSpec, type PetNotification, type PetPackage } from '@luv061211/dsh-pet-compat'
+import { frameAt, notificationSpec, type PetNotification, type PetPackage } from '@luv1211/dsh-pet-compat'
 import type {
   PetTuiAnchor,
   PetTuiConfig,

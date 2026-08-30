@@ -1,5 +1,5 @@
 {
-  "name": "@luv061211/dsh-pet-desktop",
+  "name": "@luv1211/dsh-pet-desktop",
   "description": "Optional Codex-style desktop pet companion bundle for DeepSeek Harness",
   "version": "0.1.1-rc.2",
   "publishConfig": {
@@ -38,10 +38,10 @@
     }
   },
   "dependencies": {
-    "@luv061211/dsh-client-ui-pet": "workspace:^",
-    "@luv061211/dsh-command-pet": "workspace:^",
-    "@luv061211/dsh-desktop-companion": "workspace:^",
-    "@luv061211/dsh-pet": "workspace:^"
+    "@luv1211/dsh-client-ui-pet": "workspace:^",
+    "@luv1211/dsh-command-pet": "workspace:^",
+    "@luv1211/dsh-desktop-companion": "workspace:^",
+    "@luv1211/dsh-pet": "workspace:^"
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": "^4.0.1-rc.4",

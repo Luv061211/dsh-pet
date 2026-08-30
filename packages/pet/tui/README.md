@@ -1,10 +1,10 @@
-# `@luv061211/dsh-pet-tui`
+# `@luv1211/dsh-pet-tui`
 
 English | [中文](README.zh.md)
 
 This package is the minimal standalone terminal host for the DSH Codex-compatible pet consumer. It owns interactive-TTY lifecycle, one redraw queue, the `/pets` picker, composer and screen-bottom placement, Kitty/Sixel output, and deterministic text fallback. It does not import the agent loop, model, prompt, tool, session-log, or persistence packages.
 
-The host accepts a validated `@luv061211/dsh-pet-compat` package and a host-owned frame converter. Converted frames are written only after terminal capability detection; tmux, zellij, unsupported terminals, disabled images, and graphics write failures use text output. A stale preview request cannot replace the currently selected preview, and cleanup restores raw mode and the alternate screen at most once.
+The host accepts a validated `@luv1211/dsh-pet-compat` package and a host-owned frame converter. Converted frames are written only after terminal capability detection; tmux, zellij, unsupported terminals, disabled images, and graphics write failures use text output. A stale preview request cannot replace the currently selected preview, and cleanup restores raw mode and the alternate screen at most once.
 
 When animations are enabled, redraws follow each normalized track's `nextFrameInMs` cadence; pet changes, the picker, reduced motion, and disposal cancel pending timers.
 

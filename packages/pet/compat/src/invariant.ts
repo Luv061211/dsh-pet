@@ -1,10 +1,10 @@
-/** Package-owned invariant companion. @module @luv061211/dsh-pet-compat/invariant */
+/** Package-owned invariant companion. @module @luv1211/dsh-pet-compat/invariant */
 
 /* jscpd:ignore-start */
 import type { Context } from '@deepseek-ai/cordis'
 import type { InvariantInstaller } from '@deepseek-ai/dsh-invariants'
 
-const PACKAGE_NAME = '@luv061211/dsh-pet-compat'
+const PACKAGE_NAME = '@luv1211/dsh-pet-compat'
 
 /** Cordis companion plugin name. */
 export const name = 'pet-compat-invariant'

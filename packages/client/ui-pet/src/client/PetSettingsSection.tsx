@@ -5,7 +5,7 @@ import {
   petSpriteAvatar,
   type PetDescriptor,
   type PetImportResult,
-} from '@luv061211/dsh-pet/client'
+} from '@luv1211/dsh-pet/client'
 import type { PetSettingsInjected } from './slots.ts'
 import css from './PetSettingsSection.module.css'
 

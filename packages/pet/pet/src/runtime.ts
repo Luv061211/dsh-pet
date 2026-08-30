@@ -1,6 +1,6 @@
 /** Browser-safe pet constants, validation, presentation selection, and timing. */
 
-import { DEFAULT_PET_ANIMATIONS, parsePetPackage } from '@luv061211/dsh-pet-compat'
+import { DEFAULT_PET_ANIMATIONS, parsePetPackage } from '@luv1211/dsh-pet-compat'
 import { imageDimensionsFromData } from 'image-dimensions'
 import type {
   PetActivityStatus,

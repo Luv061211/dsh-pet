@@ -1,5 +1,5 @@
 {
-  "name": "@luv061211/dsh-desktop-companion",
+  "name": "@luv1211/dsh-desktop-companion",
   "description": "Web-profile discovery registry for one constrained Electron desktop companion",
   "version": "0.1.1-rc.2",
   "publishConfig": {

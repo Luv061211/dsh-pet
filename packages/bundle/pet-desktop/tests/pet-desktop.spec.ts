@@ -2,7 +2,7 @@
  * The bundle's substance is its patch file plus the dependency that makes the
  * draggable companion window reachable. Two coupled facts keep the pet surface
  * draggable in a profile that adds this bundle:
- *   - `@luv061211/dsh-desktop-companion` is a real dependency (not a peer),
+ *   - `@luv1211/dsh-desktop-companion` is a real dependency (not a peer),
  *     so profiles that do not run the flat-module fallback still install it.
  *   - the patch list inserts the `desktop-companion` row before `pet`, so the
  *     Service loads and `ctx.get('desktopCompanion')` resolves before `pet`
@@ -38,11 +38,11 @@ describe('dsh-pet-desktop bundle', () => {
     expect(Array.isArray(parsed)).toBe(true)
   })
 
-  it('depends on @luv061211/dsh-desktop-companion so profiles install the service', () => {
+  it('depends on @luv1211/dsh-desktop-companion so profiles install the service', () => {
     // A peer would not be installed by pnpm into a profile's node_modules and
     // leaves profiles that bypass the flat-module fallback without the service.
-    expect(manifest.dependencies).toHaveProperty('@luv061211/dsh-desktop-companion')
-    expect(manifest.peerDependencies).not.toHaveProperty('@luv061211/dsh-desktop-companion')
+    expect(manifest.dependencies).toHaveProperty('@luv1211/dsh-desktop-companion')
+    expect(manifest.peerDependencies).not.toHaveProperty('@luv1211/dsh-desktop-companion')
   })
 
   it('loads the desktop-companion plugin before pet so pet can register its window', () => {
@@ -58,6 +58,6 @@ describe('dsh-pet-desktop bundle', () => {
     expect(petIndex).toBeGreaterThanOrEqual(0)
     expect(companionIndex).toBeLessThan(petIndex)
     const companionRow = inserts[companionIndex]
-    expect(companionRow?.name).toBe('@luv061211/dsh-desktop-companion')
+    expect(companionRow?.name).toBe('@luv1211/dsh-desktop-companion')
   })
 })

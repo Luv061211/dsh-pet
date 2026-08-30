@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
 import type { CommandDefinition, CommandInvocation, CommandResult } from '@deepseek-ai/dsh-commands'
-import { apply } from '@luv061211/dsh-command-pet'
+import { apply } from '@luv1211/dsh-command-pet'
 
 function boot(): { definition: CommandDefinition; setAwake: ReturnType<typeof vi.fn> } {
   const ctx = new Context()

@@ -1,5 +1,5 @@
 import type { SnapshotSelectorHook } from '@deepseek-ai/dsh-client-ui-slots'
-import type { PetImportResult } from '@luv061211/dsh-pet/client'
+import type { PetImportResult } from '@luv1211/dsh-pet/client'
 import type { PetStoreState } from './store.ts'
 
 /** Business actions supplied to the Pet settings page by the shared client plugin. */

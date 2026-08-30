@@ -1,4 +1,4 @@
-# @luv061211/dsh-desktop-companion
+# @luv1211/dsh-desktop-companion
 
 [English](README.md) | 中文
 

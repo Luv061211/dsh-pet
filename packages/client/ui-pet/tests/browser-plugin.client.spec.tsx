@@ -11,7 +11,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import { cleanup } from '@testing-library/react'
 import { ConversationEventRegistry, SlotRegistry } from '@deepseek-ai/dsh-client-runtime/client'
 import { LocaleRuntime } from '@deepseek-ai/dsh-client-locale/client'
-import type { PetDescriptor, PetSnapshot } from '@luv061211/dsh-pet/client'
+import type { PetDescriptor, PetSnapshot } from '@luv1211/dsh-pet/client'
 import { apply, inject } from '../src/client/index.ts'
 
 const PET: PetDescriptor = {

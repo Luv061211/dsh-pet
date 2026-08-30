@@ -25,34 +25,34 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@luv061211/dsh-pet": [
+      "@luv1211/dsh-pet": [
         "./packages/pet/pet/src"
       ],
-      "@luv061211/dsh-pet/types": [
+      "@luv1211/dsh-pet/types": [
         "./packages/pet/pet/src/types.ts"
       ],
-      "@luv061211/dsh-pet/client": [
+      "@luv1211/dsh-pet/client": [
         "./packages/pet/pet/src/client.ts"
       ],
-      "@luv061211/dsh-pet-compat": [
+      "@luv1211/dsh-pet-compat": [
         "./packages/pet/compat/src"
       ],
-      "@luv061211/dsh-pet-compat/types": [
+      "@luv1211/dsh-pet-compat/types": [
         "./packages/pet/compat/src/types.ts"
       ],
-      "@luv061211/dsh-command-pet": [
+      "@luv1211/dsh-command-pet": [
         "./packages/pet/command-pet/src"
       ],
-      "@luv061211/dsh-client-ui-pet": [
+      "@luv1211/dsh-client-ui-pet": [
         "./packages/client/ui-pet/src"
       ],
-      "@luv061211/dsh-pet-tui": [
+      "@luv1211/dsh-pet-tui": [
         "./packages/pet/tui/src"
       ],
-      "@luv061211/dsh-desktop-companion": [
+      "@luv1211/dsh-desktop-companion": [
         "./packages/desktop/companion/src"
       ],
-      "@luv061211/dsh-pet/remote": [
+      "@luv1211/dsh-pet/remote": [
         "./packages/pet/pet/remote-client.d.ts"
       ]
     }

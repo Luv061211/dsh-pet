@@ -1,14 +1,14 @@
 /**
  * Client-safe types for durable pet preferences and globally aggregated
  * session activity.
- * @module @luv061211/dsh-pet/types
+ * @module @luv1211/dsh-pet/types
  */
 
 // The pure-types subpath: the session entry re-exports the Context merge
 // (`sessions: SessionStore`), which would collide with the browser runtime's
 // `ISessions` face in every client-face program that reaches this module.
 import type { SessionId } from '@deepseek-ai/dsh-session/types'
-import type { PetAnimation, PetFrameGeometry } from '@luv061211/dsh-pet-compat/types'
+import type { PetAnimation, PetFrameGeometry } from '@luv1211/dsh-pet-compat/types'
 
 /** The only durable preference document accepted by the compatible pet domain. */
 export interface PetPreference {

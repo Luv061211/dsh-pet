@@ -1,7 +1,7 @@
 /**
  * Global desktop-pet domain: durable user preferences and a live,
  * session-event-derived activity read model for companion clients.
- * @module @luv061211/dsh-pet
+ * @module @luv1211/dsh-pet
  */
 
 import type { IncomingMessage, ServerResponse } from 'node:http'
@@ -13,13 +13,13 @@ import { Remote, TypertRemoteService } from '@deepseek-ai/dsh-typert-protocol'
 // Type-only: merges the optional `desktopCompanion`, `webServer`, and
 // `directoryPicker` service declarations so ctx.get() below returns their
 // real types.
-import type {} from '@luv061211/dsh-desktop-companion'
+import type {} from '@luv1211/dsh-desktop-companion'
 import type {} from '@deepseek-ai/dsh-host-directory-picker'
 import type {} from '@deepseek-ai/dsh-host-webserver'
 import { PetActivityProjection } from './activity.ts'
 import { PetCatalogStore, type PetCatalogOptions } from './catalog.ts'
 import { createPetNativeActions } from './host-native.ts'
-import { FRAME_AT_SOURCE } from '@luv061211/dsh-pet-compat'
+import { FRAME_AT_SOURCE } from '@luv1211/dsh-pet-compat'
 import {
   DEFAULT_PET_ID,
   DEFAULT_PET_SIZE_PX,

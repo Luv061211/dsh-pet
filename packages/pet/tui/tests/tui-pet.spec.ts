@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
-import { createNotification, parsePetPackage } from '@luv061211/dsh-pet-compat'
+import { createNotification, parsePetPackage } from '@luv1211/dsh-pet-compat'
 import {
   encodePetFrame,
   TERMINAL_CLEANUP,
