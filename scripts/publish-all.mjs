@@ -44,7 +44,7 @@ const order = [
   'packages/desktop/companion',
   'packages/pet/pet',
   'packages/pet/command-pet',
-  'packages/pet/pet-tui',
+  'packages/pet/tui',
   'packages/client/ui-pet',
   'packages/bundle/pet-desktop',
 ]
