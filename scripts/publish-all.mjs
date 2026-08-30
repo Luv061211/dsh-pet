@@ -21,7 +21,7 @@ if (!scope || !scope.startsWith('@')) {
 
 // Windows PATH often misses the npm-global pnpm shim; run pnpm's JS entry
 // through the current node instead of relying on the command name.
-function pnpmCommand(): readonly [string, ...string[]] {
+function pnpmCommand() {
   if (process.platform !== 'win32') return ['pnpm']
   const appData = process.env.APPDATA
   if (appData !== undefined) {
