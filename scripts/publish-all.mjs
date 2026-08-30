@@ -73,10 +73,21 @@ for (const dir of order) {
     continue
   }
   console.log(`== publishing ${dir}`)
-  execFileSync(command, [...prefix, 'publish', '--access', 'public', '--no-git-checks', ...process.argv.slice(3)], {
-    cwd: dir,
-    stdio: 'inherit',
-  })
-  published += 1
+  try {
+    execFileSync(command, [...prefix, 'publish', '--access', 'public', '--no-git-checks', ...process.argv.slice(3)], {
+      cwd: dir,
+      stdio: 'inherit',
+    })
+    published += 1
+  } catch (error) {
+    // Registry replication can lag a fresh publish, making the pre-check miss
+    // it; npm then answers "cannot publish over" — that means it IS there.
+    const text = String(error?.stderr ?? '') + String(error?.output?.map(part => part?.toString() ?? '').join('') ?? '')
+    if (text.includes('cannot publish over the previously published versions')) {
+      console.log(`== ${dir}: ${manifest.name}@${manifest.version} is already on the registry (confirmed by npm)`)
+      continue
+    }
+    throw error
+  }
 }
 console.log(`done: ${published} newly published; all packages present under ${scope}`)
