@@ -97,12 +97,12 @@ export interface PetNativeActions {
   openPetFolder(path: string): Promise<void>
 }
 
-/** Result of a Remote import request with no native host capability. */
+/** Result of an import request with no native host capability. */
 export type PetImportResult =
   | { readonly outcome: 'published'; readonly pet: PetDescriptor }
   | { readonly outcome: 'cancelled' | 'host-unavailable' }
 
-/** Result of a Remote request to open the DSH pet directory. */
+/** Result of a request to open the DSH pet directory. */
 export type PetFolderResult =
   | { readonly outcome: 'opened' }
   | { readonly outcome: 'host-unavailable' }

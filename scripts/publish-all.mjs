@@ -39,6 +39,12 @@ function pnpmCommand() {
 
 const [command, ...prefix] = pnpmCommand()
 
+console.log('== verifying build, tests, and packed installation before registry access')
+execFileSync(command, [...prefix, 'run', 'release:verify'], {
+  cwd: new URL('..', import.meta.url),
+  stdio: 'inherit',
+})
+
 const order = [
   'packages/pet/compat',
   'packages/desktop/companion',

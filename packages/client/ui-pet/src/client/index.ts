@@ -7,12 +7,6 @@
  */
 import type { ClientContext } from '@deepseek-ai/dsh-client-runtime/client'
 import { bindSnapshotSelector } from './bind-snapshot.ts'
-// Type-only: pulls the generated pets Remote API, the pet/update event
-// signature, and the sidebar.footer.action SlotMap merges.
-import type {} from '@deepseek-ai/dsh-api-remotes/client'
-// Type-only: pulls the pets Remote namespace merge (the shared remote face).
-import type {} from '@luv1211/dsh-pet/remote'
-import type { RemoteResult } from '@deepseek-ai/dsh-typert-protocol'
 import type {} from '@deepseek-ai/dsh-client-ui-conversation/client'
 import type {} from '@deepseek-ai/dsh-client-ui-layout/client'
 import type {} from '@deepseek-ai/dsh-client-ui-sidebar/client'
@@ -23,6 +17,7 @@ import { PetSettingsSection } from './PetSettingsSection.tsx'
 import { en, zh, type PetKey } from './locales.ts'
 import { petCommandInputDefinition } from './pet-command-input.ts'
 import { createPetStore } from './store.ts'
+import { createPetApi, startPetSnapshotPolling } from './pet-api.ts'
 import type { PetImportResult, PetSnapshot } from '@luv1211/dsh-pet/client'
 import type { PetSettingsInjected } from './slots.ts'
 
@@ -41,7 +36,7 @@ const NS = 'pet'
 
 /** Required services for the command projection, settings mutations, and copy. */
 export const inject = [
-  'slots', 'remote', 'remote.pets', 'locale', 'conversationEvents',
+  'slots', 'locale', 'conversationEvents',
 ]
 
 /**
@@ -54,21 +49,12 @@ export function apply(ctx: ClientContext): void {
   const t = ctx.locale.bind(NS)
   const store = createPetStore().create()
   const usePetState = bindSnapshotSelector(store)
-  // Seed the profile from the host; the forwarded event keeps it current.
-  void ctx.remote.pets.getSnapshot().then((result) => {
-    if (result.ok) store.actions.setSnapshot(result.value)
-  }).catch(() => { /* seed is best-effort; pet/update or the next mutation converges */ })
-  ctx.effect(() => ctx.remote.$on('pet/update', (snapshot) => {
-    store.actions.setSnapshot(snapshot)
-  }), 'ui-pet: pet/update')
+  const pets = createPetApi()
+  ctx.effect(() => startPetSnapshotPolling(pets, snapshot => { store.actions.setSnapshot(snapshot) }), 'ui-pet: snapshot polling')
 
-  const pets = ctx.remote.pets
-  const adopt = (result: RemoteResult<PetSnapshot>): void => {
-    if (result.ok) store.actions.setSnapshot(result.value)
-  }
+  const adopt = (snapshot: PetSnapshot): void => { store.actions.setSnapshot(snapshot) }
   const toggleAwake = async (): Promise<void> => {
-    const result = await pets.setAwake(!(store.getSnapshot().snapshot?.preference.awake ?? false))
-    adopt(result)
+    adopt(await pets.setAwake(!(store.getSnapshot().snapshot?.preference.awake ?? false)))
   }
   const selectPet = async (petId: string): Promise<void> => {
     adopt(await pets.selectPet(petId))
@@ -78,15 +64,13 @@ export function apply(ctx: ClientContext): void {
   }
   const importPetPackage = async (): Promise<PetImportResult> => {
     const result = await pets.importPetPackage()
-    if (!result.ok) throw new Error(`${result.error.code}: ${result.error.message}`)
-    if (result.value.outcome === 'published') adopt(await pets.getSnapshot())
-    return result.value
+    if (result.outcome === 'published') adopt(await pets.getSnapshot())
+    return result
   }
   const updatePetPackage = async (petId: string): Promise<PetImportResult> => {
     const result = await pets.updatePetPackage(petId)
-    if (!result.ok) throw new Error(`${result.error.code}: ${result.error.message}`)
-    if (result.value.outcome === 'published') adopt(await pets.getSnapshot())
-    return result.value
+    if (result.outcome === 'published') adopt(await pets.getSnapshot())
+    return result
   }
   const refreshCatalog = async (): Promise<void> => {
     adopt(await pets.refreshCatalog())

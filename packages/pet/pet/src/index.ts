@@ -5,11 +5,10 @@
  */
 
 import type { IncomingMessage, ServerResponse } from 'node:http'
-import type { Context } from '@deepseek-ai/cordis'
+import { Service, type Context } from '@deepseek-ai/cordis'
 import z from '@deepseek-ai/schemastery'
 import { settingsNamespace } from '@deepseek-ai/dsh-settings'
 import type { SettingsScope } from '@deepseek-ai/dsh-settings'
-import { Remote, TypertRemoteService } from '@deepseek-ai/dsh-typert-protocol'
 // Type-only: merges the optional `desktopCompanion`, `webServer`, and
 // `directoryPicker` service declarations so ctx.get() below returns their
 // real types.
@@ -17,6 +16,7 @@ import type {} from '@luv1211/dsh-desktop-companion'
 import type {} from '@deepseek-ai/dsh-host-directory-picker'
 import type {} from '@deepseek-ai/dsh-host-webserver'
 import { PetActivityProjection } from './activity.ts'
+import { handlePetHttpRequest, PET_API_ACTION_PATH, PET_API_SNAPSHOT_PATH } from './http-api.ts'
 import { PetCatalogStore, type PetCatalogOptions } from './catalog.ts'
 import { createPetNativeActions } from './host-native.ts'
 import { FRAME_AT_SOURCE } from '@luv1211/dsh-pet-compat'
@@ -89,7 +89,7 @@ function validatePetPreference(value: PetPreference): void {
 }
 
 /** Pet service (`ctx.pets`): one durable preference writer and activity aggregator. */
-export class PetService extends TypertRemoteService {
+export class PetService extends Service {
   static inject = ['settings']
   static Config: z<Config> = z.object({
     dshHome: z.string(),
@@ -132,6 +132,13 @@ export class PetService extends TypertRemoteService {
     }), 'dsh-pet: activity projection')
     const desktopCompanion = ctx.get('desktopCompanion')
     const webServer = ctx.get('webServer')
+    if (webServer !== undefined) {
+      for (const path of [PET_API_SNAPSHOT_PATH, PET_API_ACTION_PATH]) {
+        ctx.effect(() => webServer.register({
+          kind: 'exact', path, handler: (req, res) => { void handlePetHttpRequest(this, req, res) },
+        }), `dsh-pet: HTTP API ${path}`)
+      }
+    }
     if (desktopCompanion !== undefined && webServer !== undefined) {
       ctx.effect(() => desktopCompanion.register({
         id: 'pet',
@@ -210,7 +217,6 @@ export class PetService extends TypertRemoteService {
    * Read the latest durable preference and every current activity record.
    * @returns a detached, deterministically ordered snapshot.
    */
-  @Remote('getSnapshot')
   getSnapshot(): PetSnapshot {
     const activities = [...this.activities.values()].sort(comparePetActivities).map(activity => ({ ...activity }))
     const selected = activities[0]
@@ -231,7 +237,6 @@ export class PetService extends TypertRemoteService {
    * Read the current validated built-in and user package descriptors.
    * @returns a detached catalog of validated package descriptors.
    */
-  @Remote('getCatalog')
   getCatalog(): PetCatalog {
     return { pets: this.catalog.pets.map(pet => ({ ...pet })) }
   }
@@ -240,7 +245,6 @@ export class PetService extends TypertRemoteService {
    * Import one validated package selected by the native host, without accepting a client path.
    * @returns the publication, cancellation, or host-availability result.
    */
-  @Remote('importPetPackage')
   async importPetPackage(): Promise<PetImportResult> {
     const native = this.nativeActions
     if (native === undefined) return { outcome: 'host-unavailable' }
@@ -255,7 +259,6 @@ export class PetService extends TypertRemoteService {
    * or removed on disk appear without a restart.
    * @returns the fresh snapshot after the rescan.
    */
-  @Remote('refreshCatalog')
   refreshCatalog(): PetSnapshot {
     this.catalogStore.reload()
     return this.getSnapshot()
@@ -268,7 +271,6 @@ export class PetService extends TypertRemoteService {
    * @param petId - user package identifier to replace.
    * @returns the replacement, cancellation, or host-availability result.
    */
-  @Remote('updatePetPackage')
   async updatePetPackage(petId: string): Promise<PetImportResult> {
     const native = this.nativeActions
     if (native === undefined) return { outcome: 'host-unavailable' }
@@ -284,7 +286,6 @@ export class PetService extends TypertRemoteService {
    * Ask the native host to open the configured DSH pet directory.
    * @returns the opened or host-availability result.
    */
-  @Remote('openPetFolder')
   async openPetFolder(): Promise<PetFolderResult> {
     const native = this.nativeActions
     if (native === undefined) return { outcome: 'host-unavailable' }
@@ -298,7 +299,6 @@ export class PetService extends TypertRemoteService {
    * @param selectedPetId - non-empty package identifier.
    * @returns the committed fresh snapshot.
    */
-  @Remote('selectPet')
   async selectPet(selectedPetId: string): Promise<PetSnapshot> {
     if (selectedPetId.length === 0) throw new TypeError('pet preference selectedPetId must not be empty')
     if (!this.catalogStore.has(selectedPetId)) throw new TypeError(`pet ${selectedPetId} was not found in the pet catalog`)
@@ -310,7 +310,6 @@ export class PetService extends TypertRemoteService {
    * @param sizePx - logical CSS height between the configured pet limits.
    * @returns the committed fresh snapshot.
    */
-  @Remote('setSize')
   async setSize(sizePx: number): Promise<PetSnapshot> {
     validatePetSize(sizePx)
     return this.commit(preference => ({ ...preference, sizePx }))
@@ -321,7 +320,6 @@ export class PetService extends TypertRemoteService {
    * @param awake - whether companion clients render the selected pet awake.
    * @returns the committed fresh snapshot.
    */
-  @Remote('setAwake')
   setAwake(awake: boolean): Promise<PetSnapshot> {
     return this.commit(preference => ({ ...preference, awake }))
   }

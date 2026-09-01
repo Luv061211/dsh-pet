@@ -1,12 +1,15 @@
 {
   "name": "dsh-pet",
-  "version": "0.1.1-rc.2",
+  "version": "0.1.1-rc.3",
   "private": true,
   "type": "module",
   "scripts": {
     "typecheck": "tsc -b .",
     "build": "tsc -b . && pnpm -r run bundle",
-    "test": "vitest run"
+    "test": "vitest run && vitest run --config vitest.client.config.ts packages/client/ui-pet/tests/pet-api.client.spec.ts && node --test scripts/*.test.mjs",
+    "pack:verify": "node scripts/pack-all.mjs",
+    "test:packed": "node scripts/packed-integration.mjs",
+    "release:verify": "pnpm typecheck && pnpm test && pnpm build && pnpm pack:verify && pnpm test:packed"
   },
   "devDependencies": {
     "@types/node": "^24",
@@ -18,5 +21,21 @@
     "typescript": "^5.9.3",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^4.1.8"
-  }
+  },
+  "description": "[中文](#中文) | [English](#english)",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Luv061211/dsh-pet.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Luv061211/dsh-pet/issues"
+  },
+  "homepage": "https://github.com/Luv061211/dsh-pet#readme"
 }

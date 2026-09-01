@@ -9,6 +9,6 @@ export default defineConfig({
     // harness workspace: the npm-published client packages ship
     // window-loader bundles, not source-plane ESM. They stay in this repo as
     // typechecked reference material.
-    exclude: ['**/node_modules/**', 'packages/client/**', 'desktop/**'],
+    exclude: ['**/node_modules/**', 'packages/client/**', 'desktop/**', 'scripts/**'],
   },
 })

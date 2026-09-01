@@ -18,4 +18,4 @@
 
 ## Known Limitations and Deferred Work
 
-- **仅唤醒面**——命令只修改持久化的 `awake` 偏好；宠物选择、尺寸、导入和包目录操作由浏览器 UI 与 `pets` Remote API 提供。
+- **仅唤醒面**——命令只修改持久化的 `awake` 偏好；宠物选择、尺寸、导入和包目录操作由浏览器 UI 与宠物 HTTP API 提供。

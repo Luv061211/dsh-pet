@@ -34,7 +34,7 @@ const {
   restoreCompanionPlacement,
 } = require('./companion.js')
 
-const SERVER_ARGS = ['--import', 'tsx/esm', 'apps/cli/src/bin.ts', '--profile', 'web']
+const SERVER_ARGS = ['--import', 'tsx/esm', 'apps/cli/src/bin.ts', '--profile', 'web', '--no-open']
 const SERVER_ENTRY = 'apps/cli/src/bin.ts'
 const READY_TIMEOUT_MS = 120_000
 const KILL_GRACE_MS = 3_000
@@ -81,6 +81,10 @@ function hasHarnessLayout(dir) {
 let server = null
 let shuttingDown = false
 let win = null
+/** The canonical local URL the server prints once its web-runtime subtree
+ * settles; it carries the auth token the browser-trust fence requires, so the
+ * main window loads this rather than the bare root. */
+let printedUrl = null
 let companionWin = null
 let companionDescriptor = null
 /** Authoritative companion rectangle size (restore or resize request); the
@@ -179,6 +183,31 @@ function waitReady(port, timeoutMs) {
         return
       }
       setTimeout(poll, 500)
+    }
+    poll()
+  })
+}
+
+/**
+ * Resolve the canonical local URL the server prints once its web-runtime
+ * subtree settles. That line carries the auth token the browser-trust fence
+ * requires; resolving to null when the deadline lapses lets the caller fall
+ * back to the bare root and surface the fence's own explanation.
+ */
+function waitForPrintedUrl(timeoutMs) {
+  if (printedUrl !== null) return Promise.resolve(printedUrl)
+  const deadline = Date.now() + timeoutMs
+  return new Promise((resolve) => {
+    const poll = () => {
+      if (printedUrl !== null) {
+        resolve(printedUrl)
+        return
+      }
+      if (Date.now() >= deadline) {
+        resolve(null)
+        return
+      }
+      setTimeout(poll, 100)
     }
     poll()
   })
@@ -572,7 +601,17 @@ async function boot() {
       stdio: ['ignore', 'pipe', 'pipe'],
       windowsHide: true,
     })
-    server.stdout.on('data', (chunk) => log(`[server] ${chunk.toString().trimEnd()}`))
+    server.stdout.on('data', (chunk) => {
+      const line = chunk.toString().trimEnd()
+      log(`[server] ${line}`)
+      // The server prints `dsh web: http://127.0.0.1:<port>/?token=...` once the
+      // web-runtime plugin settles; capture that URL so the main window can
+      // load it and pass the browser-trust fence (the bare root is rejected).
+      // Anchor on http(s) so the follow-up banner line (`dsh web: opening the
+      // default browser...`) cannot overwrite the captured URL with prose.
+      const match = line.match(/dsh web:\s*(https?:\/\/\S+)/)
+      if (match !== null) printedUrl = match[1]
+    })
     server.stderr.on('data', (chunk) => log(`[server] ${chunk.toString().trimEnd()}`))
     server.once('exit', (code, signal) => {
       server = null
@@ -589,7 +628,14 @@ async function boot() {
 
     await waitReady(port, READY_TIMEOUT_MS)
     if (shuttingDown || win === null) return
-    win.loadURL(`http://127.0.0.1:${port}/`)
+    // The server prints the canonical URL (carrying the auth token) moments
+    // after it starts answering; wait briefly for that line so the window
+    // loads the tokened URL the browser-trust fence accepts. Fall back to the
+    // bare root only if the line never arrives (the fence then explains why).
+    const tokenedUrl = await waitForPrintedUrl(5_000)
+    if (shuttingDown || win === null) return
+    win.loadURL(tokenedUrl ?? `http://127.0.0.1:${port}/`)
+      .catch(error => log(`[desktop] main window load failed: ${error.message}`))
     discoverCompanion(port)
       .then(descriptor => {
         if (descriptor !== null && !shuttingDown) createCompanionWindow(descriptor)

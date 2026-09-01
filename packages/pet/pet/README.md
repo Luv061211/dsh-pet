@@ -14,11 +14,11 @@ The catalog always contains the embedded `deepseek-whale` package and may contai
 
 The optional `petActivity` service key supplies a host-owned activity projection. Without it, the domain adapter observes the existing `session/event` and `session/disposed` streams: turn start becomes `running`, blocked or error completion becomes `blocked`, other completion becomes `ready`, and disposal removes the record. A host projection can additionally report pending interaction and user-facing titles. The records are presentation state and are not written back as session events.
 
-Every preference or activity publication emits `pet/update`. Companion clients consume the snapshot and event through the generated `pets` Remote namespace. The desktop companion page (`/__dsh/pet/overlay`) polls `/__dsh/pet/overlay-state`, and its right-click close item tucks the pet through `POST /__dsh/pet/overlay-awake`, which accepts only an `application/json` body of exactly `{ awake: boolean }` so a cross-site POST cannot reach it. Native import and folder actions are capability-gated; browser-only compositions leave the native service absent and expose neither action as available.
+Every preference or activity publication emits `pet/update` for Host consumers. Browser controls read `/__dsh/pet/api/snapshot`, send closed JSON actions to `/__dsh/pet/api/action`, and poll to converge with changes from commands or the companion window. The desktop companion keeps its smaller overlay routes. JSON writes reject unsupported operations, extra fields, invalid values, and oversized bodies before invoking the service. Native import and folder actions are capability-gated; browser-only compositions leave the native service absent and expose neither action as available.
 
 ## Extension points
 
-Provide `petActivity` when the host already owns a richer session projection. Provide `petNative` only from a trusted local host; its picker returns bytes rather than a client-controlled path, and its folder opener receives the service-owned package root. The desktop companion registry is optional, so the domain also runs in a browser composition with the same catalog and activity Remote API.
+Provide `petActivity` when the host already owns a richer session projection. Provide `petNative` only from a trusted local host; its picker returns bytes rather than a client-controlled path, and its folder opener receives the service-owned package root. The desktop companion registry is optional, so the domain also runs in a browser composition with the same catalog and HTTP API.
 
 ## Model Experience
 

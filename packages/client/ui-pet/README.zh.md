@@ -2,11 +2,11 @@
 
 [English](README.md) | 中文
 
-可选桌面宠物 companion 的浏览器控制界面。该包在 `settings.section` 注册一个由功能插件拥有的“宠物”页面，并在 `conversation.chat.node` 注册带键的聊天命令输入行。它通过 `pets` Remote API 读取 `PetSnapshot`，并响应 `pet/update`。可拖动的精灵本身不是网页注册项——它渲染在置顶的 Electron companion 窗口中，而不会作为浮动网页覆盖层出现。
+可选桌面宠物 companion 的浏览器控制界面。该包在 `settings.section` 注册一个由功能插件拥有的“宠物”页面，并在 `conversation.chat.node` 注册带键的聊天命令输入行。它通过宠物包的同源 JSON API 读取 `PetSnapshot` 并发送修改；轮询会同步其他 Host 消费者产生的变化。可拖动的精灵本身不是网页注册项——它渲染在置顶的 Electron companion 窗口中，而不会作为浮动网页覆盖层出现。
 
 设置壳会从该插件接收一个由功能插件拥有的“宠物”页面。它与其他界面复用同一份快照和变更回调：带边框的行列表渲染每个包的头像、名称与描述，提供“选择”动作，并在当前行显示禁用的“已选”标记；组头携带重扫用户包根目录的刷新控件和唤醒/休眠开关；宿主报告原生能力时，user 来源的行会出现“更新”动作；“自定义宠物”底行显示受管理的根路径以及导入、打开文件夹动作；“外观”组保留贴图大小滑杆。
 
-完整宠物包是一个同时包含 `pet.json` 和 1536×1872 WebP 图集的目录。清单声明包 `id`、`displayName`、可选的 `description` 与 `animations`，以及安全的相对 `spritesheetPath`；宿主按清单声明的路径读取文件，再将字节交给 `@luv1211/dsh-pet` 校验并原子发布。Remote API 不接受客户端提供的路径 —— 原生选择器在宿主侧解析包；快照只暴露用于展示的受管理根路径。持久化包格式和校验约定见 [`@luv1211/dsh-pet`](../../pet/pet/README.zh.md)。
+完整宠物包是一个同时包含 `pet.json` 和 1536×1872 WebP 图集的目录。清单声明包 `id`、`displayName`、可选的 `description` 与 `animations`，以及安全的相对 `spritesheetPath`；宿主按清单声明的路径读取文件，再将字节交给 `@luv1211/dsh-pet` 校验并原子发布。HTTP API 不接受客户端提供的路径 —— 原生选择器在宿主侧解析包；快照只暴露用于展示的受管理根路径。持久化包格式和校验约定见 [`@luv1211/dsh-pet`](../../pet/pet/README.zh.md)。
 
 原生透明、置顶的精灵窗口属于桌面 companion bridge，渲染 `@luv1211/dsh-pet` 的 `/__dsh/pet/overlay` 页面。浏览器会话保留相同的目录、活动和唤醒/收起控制，但不会尝试创建系统窗口；当快照未报告宿主能力时，原生专属控制会隐藏。
 

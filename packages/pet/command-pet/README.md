@@ -18,4 +18,4 @@ None.
 
 ## Known Limitations and Deferred Work
 
-- **Awake-only surface** — the command changes only the durable `awake` preference; pet selection, size, import, and package-folder actions belong to the browser UI and the `pets` Remote API.
+- **Awake-only surface** — the command changes only the durable `awake` preference; pet selection, size, import, and package-folder actions belong to the browser UI and pet HTTP API.

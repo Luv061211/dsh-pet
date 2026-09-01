@@ -14,11 +14,11 @@
 
 可选的 `petActivity` service key 提供由宿主拥有的活动投影。没有该服务时，领域适配器观察现有的 `session/event` 和 `session/disposed` 流：turn 开始变为 `running`，blocked 或 error 结束变为 `blocked`，其他结束变为 `ready`，销毁则移除记录。宿主投影还可以提供待处理交互和面向用户的标题。这些记录是展示状态，不会被写回为 session 事件。
 
-每次偏好或活动发布都会发出 `pet/update`。伴侣客户端通过生成的 `pets` Remote 命名空间消费快照和事件。桌面伴侣页面（`/__dsh/pet/overlay`）轮询 `/__dsh/pet/overlay-state`，其右键菜单中的"关闭宠物"项通过 `POST /__dsh/pet/overlay-awake` 收起宠物；该写入只接受恰好为 `{ awake: boolean }` 的 `application/json` 请求体，跨站 POST 无法触达。原生导入与打开目录操作由能力标志控制；纯浏览器组合不提供原生服务，也不会报告这些能力可用。
+每次偏好或活动发布都会为 Host 消费者发出 `pet/update`。浏览器控制界面读取 `/__dsh/pet/api/snapshot`，向 `/__dsh/pet/api/action` 发送封闭 JSON 操作，并通过轮询同步命令或伴侣窗口产生的变化。桌面伴侣继续使用更小的 overlay 路由。JSON 写入会在调用服务前拒绝不支持的操作、多余字段、无效值和过大请求体。原生导入与打开目录操作由能力标志控制；纯浏览器组合不提供原生服务，也不会报告这些能力可用。
 
 ## 扩展点
 
-当宿主已经拥有更丰富的会话投影时，提供 `petActivity`。只应由可信的本地宿主提供 `petNative`；其选择器返回字节而不是由客户端控制的路径，其目录打开器接收由服务拥有的包根目录。桌面 companion 注册表是可选的，因此领域也可以在浏览器组合中运行，并提供相同的目录和活动 Remote API。
+当宿主已经拥有更丰富的会话投影时，提供 `petActivity`。只应由可信的本地宿主提供 `petNative`；其选择器返回字节而不是由客户端控制的路径，其目录打开器接收由服务拥有的包根目录。桌面 companion 注册表是可选的，因此领域也可以在浏览器组合中运行，并提供相同的目录和 HTTP API。
 
 ## Model Experience
 

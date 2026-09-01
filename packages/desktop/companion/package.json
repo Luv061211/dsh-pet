@@ -1,15 +1,24 @@
 {
   "name": "@luv1211/dsh-desktop-companion",
   "description": "Web-profile discovery registry for one constrained Electron desktop companion",
-  "version": "0.1.1-rc.2",
+  "version": "0.1.1-rc.3",
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "url": "git+https://github.com/Luv061211/dsh-pet.git",
     "directory": "packages/desktop/companion"
   },
+  "homepage": "https://github.com/Luv061211/dsh-pet#readme",
+  "bugs": {
+    "url": "https://github.com/Luv061211/dsh-pet/issues"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "desktop-pet",
+    "cordis"
+  ],
   "type": "module",
   "main": "lib/index.js",
   "types": "lib/types/index.d.ts",
