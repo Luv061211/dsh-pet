@@ -1,6 +1,6 @@
 {
   "name": "@luv1211/dsh-pet-desktop",
-  "description": "Optional Codex-style desktop pet companion bundle for DeepSeek Harness",
+  "description": "Customizable desktop pets for DeepSeek Harness: your sprite-based characters, agent activity, Web controls, and an optional Electron companion",
   "version": "0.1.1-rc.3",
   "publishConfig": {
     "access": "public"
@@ -16,7 +16,14 @@
   },
   "keywords": [
     "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
     "desktop-pet",
+    "customizable-pets",
+    "custom-pet-pack",
+    "sprite-animation",
+    "agent-status",
+    "electron",
     "cordis"
   ],
   "type": "module",

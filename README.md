@@ -1,32 +1,27 @@
-# dsh-pet — DeepSeek Harness 桌面宠物插件 / Desktop Pet Plugin
+# 🐾 dsh-pet — Customizable Desktop Pets for DeepSeek Harness
 
-[中文](#中文) | [English](#english)
+[中文](#中文) | [English](#english) | [Install](#install) | [Create a pet pack](docs/PET_PACKS.md)
+
+![Project artwork showing a whale, cat, and robot as example custom pets](docs/assets/dsh-pet-social-preview-github.png)
 
 <a id="中文"></a>
 ## 中文
 
-面向 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)（MIT 协议）的 Codex 风格桌面宠物伴侣插件家族。随仓库发布的唯一内置宠物是 **DeepSeek Whale**（小鲸鱼）；用户还可以向本地 DSH 管理目录导入经过校验的宠物包——这些包只存在于本机，永远不会随本仓库发布。
+**DeepSeek Harness 的可自定义桌宠系统。** 导入自己的精灵图角色和动画定义，让宠物随 Agent 活动变化；它既能在 DSH 设置页中管理，也能在支持的 Electron 桌面壳中显示为透明、可拖拽的 companion 窗口。
 
-### 包一览
+内置的 **DeepSeek Whale（小鲸鱼）** 是示例宠物，不是系统边界。`dsh-pet` 保存宠物、尺寸和显示状态，校验本地宠物包，并将同一份宠物目录提供给 Web、桌面 companion 和可选终端宿主。
 
-| 包 | 职责 |
-|---|---|
-| [`@luv1211/dsh-pet`](packages/pet/pet/README.zh.md) | `ctx.pets` Service Definition：持久化 v3 偏好、已校验包目录、实时活动读模型、`pet/update` 事件、同源 HTTP API |
-| [`@luv1211/dsh-pet-compat`](packages/pet/compat/README.zh.md) | 浏览器安全的 Codex 兼容包解析、帧调度、终端协议探测 |
-| [`@luv1211/dsh-command-pet`](packages/pet/command-pet/README.zh.md) | `/pet` 唤醒 / 收起 / 状态斜杠命令 |
-| [`@luv1211/dsh-pet-tui`](packages/pet/pet-tui/README.zh.md) | 独立终端宠物宿主（库接口） |
-| [`@luv1211/dsh-client-ui-pet`](packages/client/ui-pet/README.zh.md) | 浏览器界面：设置页与 `/pet` 命令输入投影 |
-| [`@luv1211/dsh-pet-desktop`](packages/bundle/pet-desktop/README.zh.md) | Profile bundle：把伴侣注册表挂在 pet 行之前 |
-| [`@luv1211/dsh-desktop-companion`](packages/desktop/companion/README.zh.md) | 可选的伴侣窗口描述符注册表 |
-| [`desktop/`](desktop/README.md) | 可选 Electron 桌面壳，承载可拖拽伴侣窗口 |
+### 你可以做什么
 
-### 使用
+- **使用自己的角色**：导入带 `pet.json` 与 WebP 精灵图的本地宠物包，而不是只能使用内置鲸鱼。
+- **感知 Agent 状态**：宠物显示来自 DSH 会话投影的 ready、running、waiting 和 blocked 等人类可见状态。
+- **在 Web 或桌面中使用**：设置页管理选择、尺寸、唤醒和刷新；支持的 Electron 壳还能打开透明桌面 companion。
+- **安全地管理本地资源**：宿主校验清单、路径、图片几何和资源限制；宠物资源与偏好只留在本地。
+- **不增加模型成本**：宠物是展示功能，不会加入模型输入、工具定义或 KV cache。
 
-插件家族以 `@luv1211` scope 发布到 npm。`0.1.1-rc.3` 是修复发布版本：它包含所有运行时入口，并改用不依赖树外 Typert 生成物的同源浏览器 API。完整的变更、验证范围和已知限制见 [更新说明](docs/releases/0.1.1-rc.3.md)。
+### 安装
 
-### 快速安装
-
-需要 Node.js `^22.19.0` 或 `>=24`。普通用户只需要 npm；不需要克隆本仓库，也不需要安装 pnpm：
+需要 Node.js `^22.19.0` 或 `>=24`，以及 npm 已发布的 DeepSeek Harness `0.1.1-rc.2`。普通用户只需要安装一个 bundle：
 
 ```sh
 npm install --global @deepseek-ai/dsh@0.1.1-rc.2
@@ -34,84 +29,71 @@ dsh plugin --profile web add @luv1211/dsh-pet-desktop@0.1.1-rc.3
 dsh web
 ```
 
-第一条命令安装 `dsh` 命令。若 Windows 仍显示“`dsh` 不是内部或外部命令”，关闭并重新打开终端后再运行后两条命令；npm 的全局可执行目录需要重新加入该终端的 `PATH`。若只想临时运行，不安装全局命令，也可以使用：
+启动后打开 **设置 → Pet**，选择或唤醒宠物。`@luv1211/dsh-pet-desktop` 会按正确顺序组合其余运行时组件；普通用户不需要分别安装内部包。
+
+若系统提示找不到 `dsh`，关闭并重新打开终端后再试。也可以不进行全局安装：
 
 ```sh
 npm exec --yes --package=@deepseek-ai/dsh@0.1.1-rc.2 -- dsh plugin --profile web add @luv1211/dsh-pet-desktop@0.1.1-rc.3
 npm exec --yes --package=@deepseek-ai/dsh@0.1.1-rc.2 -- dsh web
 ```
 
-安装 bundle 会安装其余运行时包并把 patch 加入指定的 DeepSeek Harness profile：
+### 创建自己的宠物
 
-```sh
-dsh plugin --profile web add @luv1211/dsh-pet-desktop@0.1.1-rc.3
-```
+一个宠物包就是包含 `pet.json` 与其引用 WebP 精灵图的本地目录。精灵图使用 192×208 像素单元、8 列网格，并支持标准 9 行或 v2 11 行 atlas。通过设置页刷新或原生导入功能发现宠物包；不合格的资源不会发布到目录中。
 
-如需手工组合，可在 profile 中使用以下行：
+从 [宠物包入门](docs/PET_PACKS.md) 开始，查看最小清单、文件布局和 DeepSeek Whale 示例。
 
-```yaml
-- id: desktop-companion
-  name: '@luv1211/dsh-desktop-companion'
+想分享自己的角色、请求功能、报告兼容性问题或帮助改进文档，请阅读 [贡献指南](CONTRIBUTING.md) 与 [社区宠物页](docs/COMMUNITY_PETS.md)。
 
-- id: pet
-  name: '@luv1211/dsh-pet'
-  config:
-    petRoot: '<your-dsh-home>/pets'
+### 项目组成
 
-- id: command-pet
-  name: '@luv1211/dsh-command-pet'
+| 使用场景 | 包或目录 | 职责 |
+|---|---|---|
+| 一键安装入口 | [`@luv1211/dsh-pet-desktop`](packages/bundle/pet-desktop/README.zh.md) | Bundle，按顺序组合宠物服务、命令和 Web UI |
+| 宠物系统 | [`@luv1211/dsh-pet`](packages/pet/pet/README.zh.md) | 偏好、已校验目录、活动读模型和同源 API |
+| 自定义包格式 | [`@luv1211/dsh-pet-compat`](packages/pet/compat/README.zh.md) | 精灵图、动画和兼容值 |
+| DSH 控制界面 | [`@luv1211/dsh-client-ui-pet`](packages/client/ui-pet/README.zh.md) | 设置、选择、刷新、导入和 `/pet` 命令展示 |
+| 桌面 companion | [`@luv1211/dsh-desktop-companion`](packages/desktop/companion/README.zh.md) 与 [`desktop/`](desktop/README.zh.md) | 注册并承载可拖拽透明窗口 |
+| 终端宿主 | [`@luv1211/dsh-pet-tui`](packages/pet/tui/README.zh.md) | 可选的 Kitty/Sixel 与文本回退呈现 |
 
-- id: ui-pet
-  name: '@luv1211/dsh-client-ui-pet'
-```
+### 兼容性与限制
 
-`desktop-companion` 行必须先于 `pet` 行加载——pet 服务在插件加载时读取注册表以注册可拖拽伴侣窗口。npm bundle 已按这个顺序提供配置。
+- 本版本面向 npm 已发布的 DeepSeek Harness `0.1.1-rc.2`；上游 `0.1.2-alpha.1` 不是本版本的兼容目标。
+- 透明置顶桌面窗口需要带 companion bridge 的 Electron 壳；浏览器会保留宠物选择、活动和唤醒控制，但不会创建系统窗口。
+- 外部文件系统改动不会自动监视。目录会在启动、导入、替换或设置页刷新时更新。
 
-经过校验的用户包是一个包含 `pet.json` 与其清单所指向 WebP 精灵图的目录（192×208 单元、8 列、9 或 11 行）。把它放到配置的 `petRoot` 下，再在设置页刷新目录即可。当宿主组合提供原生目录选择能力时，原生导入、原地替换与打开文件夹操作会出现。
+完整的发布修复与验证范围见 [0.1.1-rc.3 更新说明](docs/releases/0.1.1-rc.3.md)。
 
 ### 开发
 
 ```sh
 pnpm install
-pnpm typecheck   # 跨家族类型检查
-pnpm test        # 宿主侧 vitest 套件（浏览器界面套件作为类型检查参考）
-pnpm build       # 每个包 tsc + tsdown 构建
-pnpm release:verify # 发布前完整门禁：类型、测试、构建、tarball 与安装烟雾测试
+pnpm typecheck
+pnpm test
+pnpm build
+pnpm release:verify
 ```
-
-`packages/client/ui-pet/tests` 下的浏览器界面套件在本仓库中只做类型检查，执行需要在 harness 工作区内进行——npm 发布的客户端包是 window 加载器 bundle 格式，而非源码态 ESM。
-
-### 限制
-
-- 基于 DeepSeek Harness `0.1.1-rc.2`（npm 已发布线）构建；本家族以 `@luv1211` npm scope 发布；上游 master 已演进到 `0.1.2-alpha.1` 并更名了若干客户端内部结构，本仓库跟随已发布线。
-- 浏览器控制界面使用 `@luv1211/dsh-pet` 注册的同源 JSON API；发布不依赖树外 Typert 生成物。
-- 没有外部目录监听：目录在启动、导入或替换之后、以及显式刷新时更新。
 
 <a id="english"></a>
 ## English
 
-A Codex-style desktop pet companion plugin family for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (MIT). The only shipped pet is the built-in **DeepSeek Whale**; users can additionally import validated packages into a local, DSH-owned directory — those stay on the local machine and are never published.
+**A customizable desktop-pet system for DeepSeek Harness.** Bring your own sprite-based character and animation metadata, let it reflect agent activity, and manage it from the DSH Web UI or, when available, a transparent draggable Electron companion window.
 
-### Packages
+The built-in **DeepSeek Whale** is an example pet, not the limit of the system. `dsh-pet` persists pet selection, size, and visibility; validates local pet packs; and serves the same catalog to Web, desktop-companion, and optional terminal hosts.
 
-| Package | Role |
-|---|---|
-| [`@luv1211/dsh-pet`](packages/pet/pet/README.md) | `ctx.pets` Service Definition: durable v3 preference, validated package catalog, live session-activity read model, `pet/update` events, same-origin HTTP API |
-| [`@luv1211/dsh-pet-compat`](packages/pet/compat/README.md) | Browser-safe Codex-compatible package parser, frame scheduler, terminal protocol detection |
-| [`@luv1211/dsh-command-pet`](packages/pet/command-pet/README.md) | The `/pet` wake / tuck / status slash command |
-| [`@luv1211/dsh-pet-tui`](packages/pet/pet-tui/README.md) | Standalone terminal pet host (library surface) |
-| [`@luv1211/dsh-client-ui-pet`](packages/client/ui-pet/README.md) | Browser surface: settings section and `/pet` command-input projection |
-| [`@luv1211/dsh-pet-desktop`](packages/bundle/pet-desktop/README.md) | Profile bundle mounting the companion registry ahead of the pet row |
-| [`@luv1211/dsh-desktop-companion`](packages/desktop/companion/README.md) | Optional companion-window descriptor registry |
-| [`desktop/`](desktop/README.md) | Optional Electron desktop shell that hosts the draggable companion window |
+### What you can do
 
-### Using it
+- **Use your own character** — import a local pet pack with `pet.json` and a WebP sprite atlas instead of being limited to the bundled whale.
+- **Reflect agent activity** — pets render human-facing ready, running, waiting, and blocked activity from DSH session projections.
+- **Use Web or desktop presentation** — manage selection, size, wake state, and refresh in Settings; a supported Electron shell can open a transparent desktop companion.
+- **Keep local assets safe** — the host validates manifests, paths, image geometry, and resource limits; pet assets and preferences remain local.
+- **Add no model cost** — the pet is presentation-only and contributes no model input, tool definition, or KV-cache state.
 
-The family is published to npm under the `@luv1211` scope. `0.1.1-rc.3` is the repair release: it ships every runtime entry and replaces the out-of-tree Typert generation dependency with a same-origin browser API. See the [release notes](docs/releases/0.1.1-rc.3.md) for the complete change list, verification coverage, and known limitations.
+<a id="install"></a>
+### Install
 
-### Quick start
-
-Node.js `^22.19.0` or `>=24` is required. End users need npm only; cloning this repository and installing pnpm are not required:
+Node.js `^22.19.0` or `>=24` and the npm-published DeepSeek Harness `0.1.1-rc.2` are required. Most users install one bundle:
 
 ```sh
 npm install --global @deepseek-ai/dsh@0.1.1-rc.2
@@ -119,35 +101,45 @@ dsh plugin --profile web add @luv1211/dsh-pet-desktop@0.1.1-rc.3
 dsh web
 ```
 
-The first command installs `dsh`. If Windows still reports that `dsh` is not recognized, close and reopen the terminal before running the final two commands so the npm global executable directory reaches `PATH`. To run without a global install, use:
+Open **Settings → Pet** after startup to select or wake a pet. `@luv1211/dsh-pet-desktop` installs and composes the remaining runtime packages in their required order; end users do not install those internal packages separately.
 
-```sh
-npm exec --yes --package=@deepseek-ai/dsh@0.1.1-rc.2 -- dsh plugin --profile web add @luv1211/dsh-pet-desktop@0.1.1-rc.3
-npm exec --yes --package=@deepseek-ai/dsh@0.1.1-rc.2 -- dsh web
-```
+### Create your own pet
 
-Installing the bundle installs its runtime packages and adds its patch to the selected DeepSeek Harness profile:
+A pet pack is a local directory containing `pet.json` and the WebP atlas it names. Atlases use 192×208-pixel cells in an 8-column grid; the system accepts the standard 9-row atlas and the v2 11-row atlas. The Settings page can refresh the catalog, and native hosts can offer import; invalid resources never enter the published catalog.
 
-```sh
-dsh plugin --profile web add @luv1211/dsh-pet-desktop@0.1.1-rc.3
-```
+Start with [Create a pet pack](docs/PET_PACKS.md) for the smallest manifest, directory layout, and the DeepSeek Whale example.
 
-For a manual composition, use the YAML shown above.
+To share a character, request a feature, report a compatibility result, or improve the documentation, read [Contributing](CONTRIBUTING.md) and [Community pets](docs/COMMUNITY_PETS.md).
 
-The `desktop-companion` row must load before `pet` — the pet service reads the registry once at plugin-load time to register the draggable companion window. The npm bundle supplies this order.
+### Project map
 
-A validated user package is a directory with `pet.json` and the WebP spritesheet its manifest names (192×208 cells, 8 columns, 9 or 11 rows). Drop it under the configured `petRoot`, then refresh the catalog from the settings page. Native import, in-place replacement, and folder opening appear when the host composition serves the native directory-picker capability.
+| Use case | Package or directory | Responsibility |
+|---|---|---|
+| One-command installation | [`@luv1211/dsh-pet-desktop`](packages/bundle/pet-desktop/README.md) | Bundle that composes the pet service, command, and Web UI in order |
+| Pet system | [`@luv1211/dsh-pet`](packages/pet/pet/README.md) | Preferences, validated pet catalog, activity read model, and same-origin API |
+| Custom-pack format | [`@luv1211/dsh-pet-compat`](packages/pet/compat/README.md) | Sprite, animation, and compatibility values |
+| DSH controls | [`@luv1211/dsh-client-ui-pet`](packages/client/ui-pet/README.md) | Settings, selection, refresh, import, and `/pet` command presentation |
+| Desktop companion | [`@luv1211/dsh-desktop-companion`](packages/desktop/companion/README.md) and [`desktop/`](desktop/README.md) | Registers and hosts the draggable transparent window |
+| Terminal host | [`@luv1211/dsh-pet-tui`](packages/pet/tui/README.md) | Optional Kitty/Sixel output with a text fallback |
+
+### Compatibility and limitations
+
+- This version targets npm-published DeepSeek Harness `0.1.1-rc.2`; upstream `0.1.2-alpha.1` is not a compatibility target for this release.
+- The always-on-top transparent window needs an Electron shell with the companion bridge. Browser sessions keep catalog, activity, and wake controls but do not create a system window.
+- External directory changes are not watched. The catalog refreshes at startup, after import or replacement, or from the Settings page.
+
+Read the [0.1.1-rc.3 release notes](docs/releases/0.1.1-rc.3.md) for the repair scope and verification coverage.
 
 ### Development
 
-The commands are identical to the Chinese section above. `pnpm release:verify` is the publication gate; it installs only the generated tarballs, boots the packed pet through the real Cordis Loader, and exercises the same-origin API. The browser-surface specs under `packages/client/ui-pet/tests` are typechecked here but executed inside the harness workspace, because the npm-published client packages ship window-loader bundles rather than source-plane ESM.
+```sh
+pnpm install
+pnpm typecheck
+pnpm test
+pnpm build
+pnpm release:verify
+```
 
-### Limitations
+## License
 
-- Built against DeepSeek Harness `0.1.1-rc.2` (the npm-published line); the family publishes under the `@luv1211` npm scope. The upstream master line moved to `0.1.2-alpha.1` and renamed several client internals; this repository tracks the published line.
-- Browser controls use the same-origin JSON API registered by `@luv1211/dsh-pet`; publication does not depend on out-of-tree Typert artifacts.
-- No external directory watcher: the catalog refreshes at startup, after an import or replacement, and on explicit refresh.
-
-## 许可 / License
-
-[MIT](LICENSE) —— DeepSeek Harness 的衍生作品 / a derivative work of [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness).
+[MIT](LICENSE) — a derivative work of [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness).

@@ -22,8 +22,7 @@
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^4.1.8"
   },
-  "description": "[中文](#中文) | [English](#english)",
-  "main": "index.js",
+  "description": "Monorepo for customizable desktop pets in DeepSeek Harness",
   "directories": {
     "doc": "docs"
   },
@@ -31,9 +30,15 @@
     "type": "git",
     "url": "git+https://github.com/Luv061211/dsh-pet.git"
   },
-  "keywords": [],
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "desktop-pet",
+    "customizable-pets"
+  ],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Luv061211/dsh-pet/issues"
   },

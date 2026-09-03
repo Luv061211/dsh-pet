@@ -1,0 +1,40 @@
+name: Share a pet pack
+description: Share an original or properly licensed pet pack with the dsh-pet community.
+title: "pet: "
+labels:
+  - community-pet
+body:
+  - type: markdown
+    attributes:
+      value: "Only submit artwork that you created or are explicitly allowed to redistribute."
+  - type: input
+    id: name
+    attributes:
+      label: Pet name
+    validations:
+      required: true
+  - type: input
+    id: license
+    attributes:
+      label: License or redistribution permission
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Public source or asset link
+    validations:
+      required: true
+  - type: input
+    id: atlas
+    attributes:
+      label: Atlas specification
+      placeholder: "192×208 cells, 8 columns, 9 rows"
+    validations:
+      required: true
+  - type: textarea
+    id: preview
+    attributes:
+      label: Preview image or GIF and short description
+    validations:
+      required: true
