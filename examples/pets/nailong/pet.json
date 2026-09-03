@@ -1,0 +1,7 @@
+{
+  "id": "nailong",
+  "displayName": "Nailong",
+  "description": "Nailong, a laughing yellow creature.",
+  "spritesheetPath": "spritesheet.webp",
+  "kind": "creature"
+}

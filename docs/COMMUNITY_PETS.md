@@ -12,6 +12,7 @@
 | 宠物 | 类型 | 说明 |
 |---|---|---|
 | DeepSeek Whale | 内置示例 | 展示 192×208、8 列、9 行 WebP atlas 与最小清单 |
+| [Nailong](../examples/pets/nailong/) | 社区示例 | 仓库所有者授权公开再分发的 8×9 v1 黄色角色宠物包；附带独立许可证说明 |
 
 ### 提交方式
 
@@ -27,6 +28,7 @@ This page is the display and contribution entry point for `dsh-pet` community pe
 | Pet | Kind | Notes |
 |---|---|---|
 | DeepSeek Whale | Bundled example | Demonstrates a 192×208, 8-column, 9-row WebP atlas and the smallest manifest |
+| [Nailong](../examples/pets/nailong/) | Community example | An 8×9 v1 yellow-character pet pack authorized for public redistribution by the repository owner; includes its own license notice |
 
 ### How to submit
 

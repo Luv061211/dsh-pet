@@ -43,7 +43,7 @@ my-pet.codex-pet/
 - 支持标准 **9 行** atlas（1536×1872）和 v2 **11 行** atlas（1536×2288）。
 - 资源格式为完整的 **WebP** 图片，而不是单帧图像或外部 URL。
 
-参考随包提供的 [DeepSeek Whale 清单](../packages/pet/pet/assets/deepseek-whale/pet.json) 和 `spritesheet.webp`。它是可替换的示例，不是角色主题限制。
+参考随包提供的 [DeepSeek Whale 清单](../packages/pet/pet/assets/deepseek-whale/pet.json) 和 `spritesheet.webp`。另一个完整、可复制的社区示例是 [Nailong](../examples/pets/nailong/)。它们都是可替换的示例，不是角色主题限制。
 
 ### 导入和排错
 
@@ -92,7 +92,7 @@ The directory name only organizes files. The `id` in `pet.json` is the authorita
 - The standard **9-row** atlas (1536×1872) and v2 **11-row** atlas (1536×2288) are supported.
 - The asset is one complete **WebP** image, not a single frame or an external URL.
 
-Use the bundled [DeepSeek Whale manifest](../packages/pet/pet/assets/deepseek-whale/pet.json) and `spritesheet.webp` as a reference. It is a replaceable example, not a character-theme restriction.
+Use the bundled [DeepSeek Whale manifest](../packages/pet/pet/assets/deepseek-whale/pet.json) and `spritesheet.webp` as a reference. A second complete, copyable community example is [Nailong](../examples/pets/nailong/). Both are replaceable examples, not character-theme restrictions.
 
 ### Import and troubleshooting
 

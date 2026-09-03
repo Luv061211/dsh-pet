@@ -9,7 +9,7 @@
 
 **DeepSeek Harness 的可自定义桌宠系统。** 导入自己的精灵图角色和动画定义，让宠物随 Agent 活动变化；它既能在 DSH 设置页中管理，也能在支持的 Electron 桌面壳中显示为透明、可拖拽的 companion 窗口。
 
-内置的 **DeepSeek Whale（小鲸鱼）** 是示例宠物，不是系统边界。`dsh-pet` 保存宠物、尺寸和显示状态，校验本地宠物包，并将同一份宠物目录提供给 Web、桌面 companion 和可选终端宿主。
+内置的 **DeepSeek Whale（小鲸鱼）** 和可复制的社区示例 **[Nailong](examples/pets/nailong/)** 都只是示例宠物，不是系统边界。`dsh-pet` 保存宠物、尺寸和显示状态，校验本地宠物包，并将同一份宠物目录提供给 Web、桌面 companion 和可选终端宿主。
 
 ### 你可以做什么
 
@@ -42,7 +42,7 @@ npm exec --yes --package=@deepseek-ai/dsh@0.1.1-rc.2 -- dsh web
 
 一个宠物包就是包含 `pet.json` 与其引用 WebP 精灵图的本地目录。精灵图使用 192×208 像素单元、8 列网格，并支持标准 9 行或 v2 11 行 atlas。通过设置页刷新或原生导入功能发现宠物包；不合格的资源不会发布到目录中。
 
-从 [宠物包入门](docs/PET_PACKS.md) 开始，查看最小清单、文件布局和 DeepSeek Whale 示例。
+从 [宠物包入门](docs/PET_PACKS.md) 开始，查看最小清单、文件布局，以及 DeepSeek Whale 与 [Nailong](examples/pets/nailong/) 两个示例。
 
 想分享自己的角色、请求功能、报告兼容性问题或帮助改进文档，请阅读 [贡献指南](CONTRIBUTING.md) 与 [社区宠物页](docs/COMMUNITY_PETS.md)。
 
@@ -80,7 +80,7 @@ pnpm release:verify
 
 **A customizable desktop-pet system for DeepSeek Harness.** Bring your own sprite-based character and animation metadata, let it reflect agent activity, and manage it from the DSH Web UI or, when available, a transparent draggable Electron companion window.
 
-The built-in **DeepSeek Whale** is an example pet, not the limit of the system. `dsh-pet` persists pet selection, size, and visibility; validates local pet packs; and serves the same catalog to Web, desktop-companion, and optional terminal hosts.
+The bundled **DeepSeek Whale** and the copyable community example **[Nailong](examples/pets/nailong/)** are example pets, not the limit of the system. `dsh-pet` persists pet selection, size, and visibility; validates local pet packs; and serves the same catalog to Web, desktop-companion, and optional terminal hosts.
 
 ### What you can do
 
@@ -107,7 +107,7 @@ Open **Settings → Pet** after startup to select or wake a pet. `@luv1211/dsh-p
 
 A pet pack is a local directory containing `pet.json` and the WebP atlas it names. Atlases use 192×208-pixel cells in an 8-column grid; the system accepts the standard 9-row atlas and the v2 11-row atlas. The Settings page can refresh the catalog, and native hosts can offer import; invalid resources never enter the published catalog.
 
-Start with [Create a pet pack](docs/PET_PACKS.md) for the smallest manifest, directory layout, and the DeepSeek Whale example.
+Start with [Create a pet pack](docs/PET_PACKS.md) for the smallest manifest, directory layout, and the DeepSeek Whale and [Nailong](examples/pets/nailong/) examples.
 
 To share a character, request a feature, report a compatibility result, or improve the documentation, read [Contributing](CONTRIBUTING.md) and [Community pets](docs/COMMUNITY_PETS.md).
 
